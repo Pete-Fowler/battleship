@@ -6,7 +6,7 @@ describe('ship factory', () => {
     testSub = makeShip('sub');
   });
   test('ship exists', () => {
-    expect(testSub.length).toBe(3);
+    expect(testSub.getLength()).toBe(3);
     expect(testSub.type).toBe('sub');
   });
   test('2 hits', () => {

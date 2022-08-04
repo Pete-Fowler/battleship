@@ -16,7 +16,9 @@ describe('game board', () => {
     expect(board.getMap()).toEqual(boardTemplate);
   });
   test.only('place ship', () => {
-    expect(board.place(makeShip(5), 0, 0, 'x')).toEqual([['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    const carrier = makeShip('carrier');
+    board.place(carrier, 0, 0, 'x');
+    expect(board.getMap()).toEqual([['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0],
       ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], 
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],]);
