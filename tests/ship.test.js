@@ -1,9 +1,9 @@
-import ship from '../src/modules/ship';
+import makeShip from '../src/modules/ship';
 
 describe('ship factory', () => {
   let testSub;
   beforeEach(() => {
-    testSub = ship('sub');
+    testSub = makeShip('sub');
   });
   test('ship exists', () => {
     expect(testSub.length).toBe(3);

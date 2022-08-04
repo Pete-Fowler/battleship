@@ -1,4 +1,4 @@
-const ship = (type) => {
+const makeShip = (type) => {
   let length;
   if(type === 'carrier') {length = 5;}
   if(type === 'battleship') {length = 4;}
@@ -13,4 +13,4 @@ const ship = (type) => {
 return { length, type, hit, isSunk, hull };   // Hull is returned now only for testing
 }
 
-export default ship;
+export default makeShip;
