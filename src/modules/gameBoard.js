@@ -14,12 +14,16 @@ const gameBoard = () => {
     let a = x;
     let b = y;
     while(i < ship.length) {
+      map[a][b] = ship.type;
       if(axis === 'x') {
-        map[a][b] = ship.type;
         a += 1;
+        i += 1;
+      } else {
+        b += 1;
         i += 1;
       }
     }
+    console.log(map);
   }
   return { getMap, init, place };
 }

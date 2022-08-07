@@ -15,13 +15,21 @@ describe('game board', () => {
   test('make 10x10 board', () => {
     expect(board.getMap()).toEqual(boardTemplate);
   });
-  test('place ship', () => {
+  test('place carrier, 0, 0, x', () => {
     const carrier = makeShip('carrier');
     board.place(carrier, 0, 0, 'x');
     expect(board.getMap()).toEqual([['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0],
       ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], ['carrier', 0, 0, 0, 0, 0, 0, 0, 0, 0], 
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
+  });
+  test('place destroyer, 8, 6, y', () => {
+    const destroyer = makeShip('destroyer');
+    board.place(destroyer, 8, 6, 'y');
+    boardTemplate[8][6] = 'destroyer';
+    boardTemplate[8][7] = 'destroyer';
+    boardTemplate[8][8] = 'destroyer';
+    expect(board.getMap()).toEqual(boardTemplate);
   });
 });
 
