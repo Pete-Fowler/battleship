@@ -1,4 +1,4 @@
-import makeShip from './ship';
+
 
 const gameBoard = () => {
   let map;
@@ -6,19 +6,18 @@ const gameBoard = () => {
     map = Array(10).fill(Array(10).fill(0));
   }
   const getMap = () => map;
-  
   const place = (ship, x, y, axis) => {
     let i = 0;
     let a = x;
     let b = y;
-    // map[a][b] = ship.type;
-    while(i < ship.getLength()) {
+    while(i < ship.length) {
       if(axis === 'x') {
         map[a][b] = ship.type;
-        a++;
-        i++;
+        a += 1;
+        i += 1;
       }
     }
+    console.log(map);
   }
   return { getMap, init, place };
 }

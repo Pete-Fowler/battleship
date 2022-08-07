@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import makeShip from '../src/modules/ship';
 
 describe('ship factory', () => {
@@ -6,7 +7,7 @@ describe('ship factory', () => {
     testSub = makeShip('sub');
   });
   test('ship exists', () => {
-    expect(testSub.getLength()).toBe(3);
+    expect(testSub.length).toBe(3);
     expect(testSub.type).toBe('sub');
   });
   test('2 hits', () => {
