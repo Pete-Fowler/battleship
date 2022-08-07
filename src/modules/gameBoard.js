@@ -14,7 +14,7 @@ const gameBoard = () => {
     let a = x;
     let b = y;
     while(i < ship.length) {
-      map[a][b] = ship.type;
+      map[a][b] = ship;
       if(axis === 'x') {
         a += 1;
         i += 1;
@@ -23,7 +23,15 @@ const gameBoard = () => {
         i += 1;
       }
     }
-    console.log(map);
+  }
+  const incoming = (x, y) => {
+
+    // if(map[x][y] === )
+
+    // takes a pair of coordinates
+    // determines whether or not the attack hit a ship
+    // sends the ‘hit’ function to the correct ship, 
+    // or records the coordinates of the missed shot.
   }
   return { getMap, init, place };
 }
