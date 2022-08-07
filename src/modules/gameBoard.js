@@ -3,7 +3,10 @@
 const gameBoard = () => {
   let map;
   const init = () => {
-    map = Array(10).fill(Array(10).fill(0));
+    map = Array(10);
+    for(let i = 0; i < map.length; i += 1) {
+      map[i] = Array(10).fill(0);
+    }
   }
   const getMap = () => map;
   const place = (ship, x, y, axis) => {
@@ -17,7 +20,6 @@ const gameBoard = () => {
         i += 1;
       }
     }
-    console.log(map);
   }
   return { getMap, init, place };
 }
