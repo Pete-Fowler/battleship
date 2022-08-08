@@ -26,12 +26,17 @@ const gameBoard = () => {
   }
   const incoming = (x, y) => {
     if(typeof map[x][y] === 'object') {
-      map[x][y][0].hit(map[x][y][1]);
+      const target = map[x][y];
+      target[0].hit(target[1]);
     } else {
       map[x][y] = 1;
     }
   }
   return { getMap, init, place, incoming };
 }
-
+// gameboard should report whether or not all ships have sunk
+//   test if ships are sunk after each hit
+//   if so, increment a board sunk counter
+//   after each hit, test if sunk count is five
+//     if yes, report the game is over by calling a game over function
 export default gameBoard;

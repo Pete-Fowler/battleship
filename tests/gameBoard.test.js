@@ -41,8 +41,9 @@ describe('game board', () => {
     expect(patrol.hull[0]).toEqual(1);
     expect(board.getMap()[3][4]).toEqual(1);
   });
-    // takes a pair of coordinates
-    // determines whether or not the attack hit a ship
+  test('track sunk ships & game over', () => {
+
+  });
 });
 
 
