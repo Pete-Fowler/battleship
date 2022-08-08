@@ -25,17 +25,13 @@ const gameBoard = () => {
     }
   }
   const incoming = (x, y) => {
-
-    if(typeof map[x][y] === object) {
-      map[x][y].hit(spot())
+    if(typeof map[x][y] === 'object') {
+      map[x][y][0].hit(map[x][y][1]);
+    } else {
+      map[x][y] = 1;
     }
-
-    // takes a pair of coordinates
-    // determines whether or not the attack hit a ship
-    // sends the ‘hit’ function to the correct ship, 
-    // or records the coordinates of the missed shot.
   }
-  return { getMap, init, place };
+  return { getMap, init, place, incoming };
 }
 
 export default gameBoard;

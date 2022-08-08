@@ -31,6 +31,18 @@ describe('game board', () => {
     boardTemplate[8][8] = [destroyer, 2];
     expect(board.getMap()).toEqual(boardTemplate);
   });
+  test('incoming - hit, hit, miss', () => {
+    const patrol = makeShip('patrolBoat');
+    board.place(patrol, 4, 4, 'x');
+    board.incoming(5, 4);
+    board.incoming(4, 4);
+    board.incoming(3, 4);
+    expect(patrol.hull[1]).toEqual(1);
+    expect(patrol.hull[0]).toEqual(1);
+    expect(board.getMap()[3][4]).toEqual(1);
+  });
+    // takes a pair of coordinates
+    // determines whether or not the attack hit a ship
 });
 
 
