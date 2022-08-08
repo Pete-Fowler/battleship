@@ -14,7 +14,7 @@ const gameBoard = () => {
     let a = x;
     let b = y;
     while(i < ship.length) {
-      map[a][b] = ship;
+      map[a][b] = [ship, i];
       if(axis === 'x') {
         a += 1;
         i += 1;
@@ -26,7 +26,9 @@ const gameBoard = () => {
   }
   const incoming = (x, y) => {
 
-    // if(map[x][y] === )
+    if(typeof map[x][y] === object) {
+      map[x][y].hit(spot())
+    }
 
     // takes a pair of coordinates
     // determines whether or not the attack hit a ship
