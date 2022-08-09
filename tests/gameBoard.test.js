@@ -41,8 +41,12 @@ describe('game board', () => {
     expect(patrol.hull[0]).toEqual(1);
     expect(board.getMap()[3][4]).toEqual(1);
   });
-  test('track sunk ships & game over', () => {
-
+  test('gameBoard tests if ship is sunk', () => {
+    const patrol = makeShip('patrolBoat');
+    board.place(patrol, 4, 4, 'x');
+    board.incoming(5, 4);
+    board.incoming(4, 4);
+    expect(board.getSunkShips()).toBe(1);
   });
 });
 
