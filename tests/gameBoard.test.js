@@ -41,16 +41,6 @@ describe('game board', () => {
     expect(patrol.hull[0]).toEqual(1);
     expect(board.getMap()[3][4]).toEqual(1);
   });
-  test('gameBoard tests if ship is sunk & marks miss on map', () => {
-    const patrol = makeShip('patrolBoat');
-    board.place(patrol, 4, 4, 'x');
-    board.incoming(5, 4);
-    board.incoming(4, 4);
-    board.incoming(3, 3);
-    expect(board.getSunkShips()).toBe(1);
-    expect(board.getMap()[3][3]).toBe(1);
-  });
-});
 
 
 // create board - 10x10
