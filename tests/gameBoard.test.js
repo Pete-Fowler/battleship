@@ -7,12 +7,12 @@ describe('game board', () => {
   let boardTemplate;
   beforeEach(() => {
     board.init();
+  });
+  test('make 10x10 board', () => {
     boardTemplate = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-  });
-  test('make 10x10 board', () => {
     expect(board.getMap()).toEqual(boardTemplate);
   });
   test('place carrier, 0, 0, x', () => {
@@ -31,25 +31,31 @@ describe('game board', () => {
     boardTemplate[8][8] = [destroyer, 2];
     expect(board.getMap()).toEqual(boardTemplate);
   });
-  test('incoming - hit, hit, miss', () => {
+  test('Incoming, hull damage, sunk ship tracking, miss tracking', () => {
     const patrol = makeShip('patrolBoat');
     board.place(patrol, 4, 4, 'x');
+    board.sunkShips = 4;
     board.incoming(5, 4);
     board.incoming(4, 4);
     board.incoming(3, 4);
     expect(patrol.hull[1]).toEqual(1);
     expect(patrol.hull[0]).toEqual(1);
+    expect(board.getSunkShips()).toEqual(1);
     expect(board.getMap()[3][4]).toEqual(1);
   });
+  test('gameOver() detects game end', () => {
+    // const patrol = makeShip('patrolBoat');
+    // board.place(patrol, 4, 4, 'x');
+    // board.sunkShips = 4;
+    // console.log(board.sunkShips);
+    // board.incoming(5, 4);
+    // board.incoming(4, 4);
+    // console.log(board.sunkShips);
+    expect(board.isGameOver(5)).toEqual(true);
+  })
+});
 
-
-// create board - 10x10
-  // x, y cartesian coords ascending from bottom left, where x is columns and y is rows
-// place ships
-  // take coords, instantiate ship w factory
-// receive attack
-  // take coords, 
-// track miss
-// all ships sunk
+// test - gameboard should be able to report if all ships are sunk
+// 
 
 // ships are carrier 5 / battleship 4 / destroyer 3 / sub 3 / ptb 2

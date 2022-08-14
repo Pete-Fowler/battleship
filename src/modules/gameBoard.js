@@ -25,10 +25,20 @@ const gameBoard = () => {
       }
     }
   }
+  const gameOver = () => {
+    // to be added...
+  }
+  const isGameOver = (n) => {
+    if(n === 5) {
+      gameOver();
+      return true;
+    }
+  }
   const testIfSunk = (ship) => {
     if(ship.isSunk()) {
       sunkShips =+ 1;
     }
+    isGameOver(sunkShips);
   }
   const incoming = (x, y) => {
     let ship;
@@ -43,7 +53,8 @@ const gameBoard = () => {
     }
   }
   const getSunkShips = () => sunkShips;
-  return { getMap, init, place, incoming, getSunkShips };
+  return { init, getMap, place, gameOver, isGameOver, testIfSunk, 
+    incoming, getSunkShips };
 }
 
 // gameboard should report whether or not all ships have sunk
