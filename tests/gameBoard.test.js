@@ -44,18 +44,32 @@ describe('game board', () => {
     expect(board.getMap()[3][4]).toEqual(1);
   });
   test('gameOver() detects game end', () => {
-    // const patrol = makeShip('patrolBoat');
-    // board.place(patrol, 4, 4, 'x');
-    // board.sunkShips = 4;
-    // console.log(board.sunkShips);
-    // board.incoming(5, 4);
-    // board.incoming(4, 4);
-    // console.log(board.sunkShips);
-    expect(board.isGameOver(5)).toEqual(true);
+    const patrol = makeShip('patrolBoat');
+    const sub = makeShip('sub');
+    const destroyer = makeShip('destroyer');
+    const battleship = makeShip('battleship');
+    const carrier = makeShip('carrier');
+    board.place(carrier, 0, 0, 'x');
+    board.place(battleship, 0, 1, 'x');
+    board.place(destroyer, 0, 2, 'x');
+    board.place(sub, 0, 3, 'x');
+    board.place(patrol, 0, 4, 'x');
+    board.incoming(0, 0); // carrier
+    board.incoming(1, 0);
+    board.incoming(2, 0);
+    board.incoming(3, 0);
+    board.incoming(0, 1); // battleship;
+    board.incoming(1, 1);
+    board.incoming(2, 1);
+    board.incoming(3, 1);
+    board.incoming(0, 2); // destroyer
+    board.incoming(1, 2);
+    board.incoming(2, 2);
+    board.incoming(0, 3); // sub
+    board.incoming(1, 3);
+    board.incoming(2, 3); 
+    expect(board.gameOver()).toEqual(true);
   })
 });
-
-// test - gameboard should be able to report if all ships are sunk
-// 
 
 // ships are carrier 5 / battleship 4 / destroyer 3 / sub 3 / ptb 2

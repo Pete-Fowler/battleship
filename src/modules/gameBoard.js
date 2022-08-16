@@ -25,13 +25,11 @@ const gameBoard = () => {
       }
     }
   }
-  const gameOver = () => {
-    // to be added...
-  }
+  const gameOver = () => true; // to be edited
+
   const isGameOver = (n) => {
     if(n === 5) {
       gameOver();
-      return true;
     }
   }
   const testIfSunk = (ship) => {
