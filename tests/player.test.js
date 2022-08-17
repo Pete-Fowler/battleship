@@ -16,7 +16,7 @@ describe('player', () => {
     expect(!!p1.attack).toEqual(true);
     expect(p1.boardOfAttack).toBe(board);
   });
-  test('attack', () => {
+  test('player attack', () => {
     p1.attack(0, 0);
     expect(sub.getHull()).toEqual([1, 0, 0]);
     p1.attack(0, 2);
@@ -25,4 +25,7 @@ describe('player', () => {
     expect(sub.getHull()).toEqual([1, 1, 1]);
     expect(sub.isSunk()).toBe(true);
   });
+  test('AI Attack', () => {
+    
+  })
 });
