@@ -56,10 +56,4 @@ const gameBoard = () => {
     incoming, getSunkShips };
 }
 
-// gameboard should report whether or not all ships have sunk
-//   test if ships are sunk after each hit
-//   if so, increment a board sunk counter
-//   after each hit, test if sunk count is five
-//     if yes, report the game is over by calling a game over function
-
 export default gameBoard;
