@@ -27,10 +27,13 @@ const gameBoard = () => {
       }
     }
   }
-  // const gameOver = () => true; to be edited
+  const gameOver = () => true;  // to be edited
 
-  const isGameOver = (n) => n === 5;
-
+  const isGameOver = (n) => {
+    if(n === 5) {
+      gameOver();
+    }
+  }
   const testIfSunk = (ship) => {
     if(ship.isSunk()) {
       sunkShips += 1;
@@ -49,7 +52,7 @@ const gameBoard = () => {
     }
   }
   const getSunkShips = () => sunkShips;
-  return { init, getMap, place, isGameOver, testIfSunk, 
+  return { init, getMap, place, gameOver, isGameOver, testIfSunk, 
     incoming, getSunkShips };
 }
 
