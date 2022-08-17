@@ -4,6 +4,7 @@ const gameBoard = () => {
   let map;
   let sunkShips = 0;
   const init = () => {
+    sunkShips = 0;
     map = Array(10);
     for(let i = 0; i < map.length; i += 1) {
       map[i] = Array(10).fill(0);

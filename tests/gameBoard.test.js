@@ -53,6 +53,7 @@ describe('game board', () => {
     board.place(destroyer, 0, 2, 'x');
     board.place(sub, 0, 3, 'x');
     board.place(patrol, 0, 4, 'x');
+    console.log(board.getSunkShips());
     board.incoming(0, 0); // carrier
     board.incoming(1, 0);
     board.incoming(2, 0);
