@@ -11,6 +11,7 @@ const gameBoard = () => {
   }
   const getMap = () => map;
   const place = (ship, x, y, axis) => {
+    // i is hull index to track hits
     let i = 0;
     let a = x;
     let b = y;
@@ -25,13 +26,10 @@ const gameBoard = () => {
       }
     }
   }
-  const gameOver = () => true; // to be edited
+  // const gameOver = () => true; to be edited
 
-  const isGameOver = (n) => {
-    if(n === 5) {
-      gameOver();
-    }
-  }
+  const isGameOver = (n) => n === 5;
+
   const testIfSunk = (ship) => {
     if(ship.isSunk()) {
       sunkShips =+ 1;
@@ -51,7 +49,7 @@ const gameBoard = () => {
     }
   }
   const getSunkShips = () => sunkShips;
-  return { init, getMap, place, gameOver, isGameOver, testIfSunk, 
+  return { init, getMap, place, isGameOver, testIfSunk, 
     incoming, getSunkShips };
 }
 

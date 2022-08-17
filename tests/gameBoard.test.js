@@ -58,6 +58,7 @@ describe('game board', () => {
     board.incoming(1, 0);
     board.incoming(2, 0);
     board.incoming(3, 0);
+    board.incoming(4, 0);
     board.incoming(0, 1); // battleship;
     board.incoming(1, 1);
     board.incoming(2, 1);
@@ -68,7 +69,12 @@ describe('game board', () => {
     board.incoming(0, 3); // sub
     board.incoming(1, 3);
     board.incoming(2, 3); 
-    expect(board.gameOver()).toEqual(true);
+    board.incoming(0, 4);
+    board.incoming(1, 4);
+    console.log(board.getMap());
+    console.log(patrol, sub, destroyer, battleship, carrier);
+    console.log(board.getSunkShips());
+    expect(board.isGameOver()).toEqual(true);
   })
 });
 
