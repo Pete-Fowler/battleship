@@ -4,13 +4,12 @@ import gameBoard from "../src/modules/gameBoard";
 import makeShip from "../src/modules/ship";
 
 describe('player', () => {
-  // beforeEach(() => {
-    const board = gameBoard();
-    board.init();
-    const p1 = player('Sal', board, 'human');
-    const sub = makeShip('sub');
-    board.place(sub, 0, 0, 'y');
-  // });
+  const board = gameBoard();
+  board.init();
+  const p1 = player('Sal', board, 'human');
+  const sub = makeShip('sub');
+  board.place(sub, 0, 0, 'y');
+  
   test('player object created', () => {
     expect(p1.name).toBe('Sal');
     expect(p1.type).toBe('human');
