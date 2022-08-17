@@ -17,12 +17,11 @@ describe('ship factory', () => {
   })
   test('Sunk', () => {
     testSub.hit(0);
+    expect(testSub.isSunk()).toBe(false);
     testSub.hit(1);
+    expect(testSub.isSunk()).toBe(false);
     testSub.hit(2);
     expect(testSub.isSunk()).toBe(true);
-  });
-  test('Not sunk', () => {
-    expect(testSub.isSunk()).toBe(false);
   });
 });
 

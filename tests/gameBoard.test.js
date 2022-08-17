@@ -68,9 +68,8 @@ describe('game board', () => {
     board.incoming(0, 3); // sub
     board.incoming(1, 3);
     board.incoming(2, 3); 
-    board.incoming(0, 4);
+    board.incoming(0, 4); // ptb
     board.incoming(1, 4);
-    console.log(patrol.isSunk(), sub.isSunk(), destroyer.isSunk(), battleship.isSunk(), carrier.isSunk());
     console.log(board.getSunkShips());
     expect(board.isGameOver()).toEqual(true);
   })
