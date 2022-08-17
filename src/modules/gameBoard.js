@@ -2,7 +2,7 @@
 
 const gameBoard = () => {
   let map;
-  let sunkShips;
+  let sunkShips = 0;
   const init = () => {
     map = Array(10);
     for(let i = 0; i < map.length; i += 1) {
@@ -32,7 +32,7 @@ const gameBoard = () => {
 
   const testIfSunk = (ship) => {
     if(ship.isSunk()) {
-      sunkShips =+ 1;
+      sunkShips += 1;
     }
     isGameOver(sunkShips);
   }

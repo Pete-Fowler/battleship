@@ -34,7 +34,6 @@ describe('game board', () => {
   test('Incoming, hull damage, sunk ship tracking, miss tracking', () => {
     const patrol = makeShip('patrolBoat');
     board.place(patrol, 4, 4, 'x');
-    board.sunkShips = 4;
     board.incoming(5, 4);
     board.incoming(4, 4);
     board.incoming(3, 4);
@@ -71,8 +70,7 @@ describe('game board', () => {
     board.incoming(2, 3); 
     board.incoming(0, 4);
     board.incoming(1, 4);
-    console.log(board.getMap());
-    console.log(patrol, sub, destroyer, battleship, carrier);
+    console.log(patrol.isSunk(), sub.isSunk(), destroyer.isSunk(), battleship.isSunk(), carrier.isSunk());
     console.log(board.getSunkShips());
     expect(board.isGameOver()).toEqual(true);
   })
