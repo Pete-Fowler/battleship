@@ -40,8 +40,7 @@ const gameBoard = () => {
     let ship;
     let hullIndex;
     if(typeof map[x][y] === 'object') {
-      ship = map[x][y][0];
-      hullIndex = map[x][y][1];
+      [ ship, hullIndex ] = map[x][y];    // 0 is ship object, 1 is hull index. see place()
       ship.hit(hullIndex);
       testIfSunk(ship);
     } else {
