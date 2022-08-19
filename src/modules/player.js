@@ -4,8 +4,16 @@ const player = (moniker, board, typeOfPlayer) => {
   const boardOfAttack = board;
   const isCurrentTurn = false;
   const getTurn = () => isCurrentTurn;
-  const attack = (x, y, axis) => {
-    boardOfAttack.incoming(x, y, axis)
+  const attack = (x, y) => {
+    if(typeOfPlayer === 'human') {
+      boardOfAttack.incoming(x, y)
+    } else {
+      const attacks = [];
+      const a = Math.round(Math.random() * 9);
+      const b = Math.round(Math.random() * 9);
+      
+      boardOfAttack.incoming(a, b);
+    }
   };
 
   return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack }
