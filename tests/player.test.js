@@ -3,22 +3,13 @@ import player from "../src/modules/player";
 import gameBoard from "../src/modules/gameBoard";
 import makeShip from "../src/modules/ship";
 
-describe('player', () => {
-  const boardTemplate = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+describe('human player', () => {
   const board = gameBoard();
   board.init();
-  
-  const AI = player('Gustov', board, 'AI')
   const P1 = player('Sal', board, 'human');
   const sub = makeShip('sub');
   board.place(sub, 0, 0, 'y');
-  
-  beforeEach(() => {
-    board.init();
-  });
+
   test('player object created', () => {
     expect(P1.name).toBe('Sal');
     expect(P1.type).toBe('human');
@@ -34,12 +25,23 @@ describe('player', () => {
     expect(sub.getHull()).toEqual([1, 1, 1]);
     expect(sub.isSunk()).toBe(true);
   });
-  test('AI fires a shot', () => {
-    console.log(board.getMap);
+});
+describe('AI player', () => {
+  const boardTemplate = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+    const board = gameBoard();
+    board.init();
+    const sub = makeShip('sub');
+    board.place(sub, 0, 0, 'y');
+    const AI = player('Gustov', board, 'AI')
+  test('Fires a shot', () => {
     AI.attack();
     expect(board.getMap()).not.toEqual(boardTemplate);
-    expect(AI.getAIcoordinates()[0]).toBeGreaterThanOrEqual(0).toBeLessThan(10);
-    expect(AI.getAIcoordinates()[1]).toBeGreaterThanOrEqual(0).toBeLessThan(10);
-    console.log(board.getMap);
-  })
+    expect(AI.getAIcoordinates()[0]).toBeGreaterThanOrEqual(0);
+    expect(AI.getAIcoordinates()[0]).toBeLessThan(10);
+    expect(AI.getAIcoordinates()[1]).toBeGreaterThanOrEqual(0)
+    expect(AI.getAIcoordinates()[1]).toBeLessThan(10);
+  });
 });
