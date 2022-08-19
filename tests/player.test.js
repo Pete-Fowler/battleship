@@ -38,6 +38,8 @@ describe('player', () => {
     console.log(board.getMap);
     AI.attack();
     expect(board.getMap()).not.toEqual(boardTemplate);
+    expect(AI.getAIcoordinates()[0]).toBeGreaterThanOrEqual(0).toBeLessThan(10);
+    expect(AI.getAIcoordinates()[1]).toBeGreaterThanOrEqual(0).toBeLessThan(10);
     console.log(board.getMap);
   })
 });

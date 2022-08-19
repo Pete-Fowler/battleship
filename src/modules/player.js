@@ -4,19 +4,20 @@ const player = (moniker, board, typeOfPlayer) => {
   const boardOfAttack = board;
   const isCurrentTurn = false;
   const getTurn = () => isCurrentTurn;
+  let a, b;  // for AI coordinates
   const attack = (x, y) => {
     if(typeOfPlayer === 'human') {
       boardOfAttack.incoming(x, y)
     } else {
       const attacks = [];
-      const a = Math.round(Math.random() * 9);
-      const b = Math.round(Math.random() * 9);
+      a = Math.round(Math.random() * 9);
+      b = Math.round(Math.random() * 9);
       
       boardOfAttack.incoming(a, b);
     }
   };
-
-  return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack }
+  const getAIcoordinates = () => [a, b];
+  return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack, getAIcoordinates }
 }
 
 export default player;
