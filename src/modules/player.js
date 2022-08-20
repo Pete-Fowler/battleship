@@ -8,7 +8,7 @@ const player = (moniker, board, typeOfPlayer) => {
   // AI code
   let a;  // for AI coordinates
   let b; 
-  const AImap = Array(10);  // 0 is unknown, 1 is a miss, 2 is a hit
+  const AImap = Array(10);  // 0 is unknown, 1 is miss, 2 is hit
   for(let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
   }
@@ -26,6 +26,7 @@ const player = (moniker, board, typeOfPlayer) => {
     // AI attack branch
     } else {  
       pickCoordinates();
+      // AImap[a][b] = 1;       -- this code is making it hang
       boardOfAttack.incoming(a, b);
     }
   };
