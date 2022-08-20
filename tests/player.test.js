@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
 import player from "../src/modules/player";
 import gameBoard from "../src/modules/gameBoard";
@@ -26,22 +27,30 @@ describe('human player', () => {
     expect(sub.isSunk()).toBe(true);
   });
 });
+
 describe('AI player', () => {
-  const boardTemplate = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-    const board = gameBoard();
-    board.init();
+  const board = gameBoard();
+  board.init();
+  const AI = player('Gustov', board, 'AI')
+  test('Fires a shot', () => {
     const sub = makeShip('sub');
     board.place(sub, 0, 0, 'y');
-    const AI = player('Gustov', board, 'AI')
-  test('Fires a shot', () => {
     AI.attack();
     expect(board.getMap()).not.toEqual(boardTemplate);
     expect(AI.getAIcoordinates()[0]).toBeGreaterThanOrEqual(0);
     expect(AI.getAIcoordinates()[0]).toBeLessThan(10);
     expect(AI.getAIcoordinates()[1]).toBeGreaterThanOrEqual(0)
     expect(AI.getAIcoordinates()[1]).toBeLessThan(10);
+  });
+  test("Won't repeat shot", () => {
+    const boardTemplate = Array(10);
+    for(let i = 0; i < boardTemplate.length; i++) {
+      boardTemplate[i] = Array(10).fill(1);
+    }
+    board.init();
+    for(let i = 0; i < 100; i++) {
+      AI.attack();
+    }
+    expect(board.getMap()).toEqual(boardTemplate);
   });
 });
