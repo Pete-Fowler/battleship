@@ -29,6 +29,10 @@ describe('human player', () => {
 });
 
 describe('AI player', () => {
+  const zeroBoard = Array(10);
+  for(let i = 0; i < zeroBoard.length; i++) {
+    zeroBoard[i] = Array(10).fill(0);
+  }
   const board = gameBoard();
   board.init();
   const AI = player('Gustov', board, 'AI')
@@ -36,21 +40,21 @@ describe('AI player', () => {
     const sub = makeShip('sub');
     board.place(sub, 0, 0, 'y');
     AI.attack();
-    expect(board.getMap()).not.toEqual(boardTemplate);
+    expect(board.getMap()).not.toEqual(zeroBoard);
     expect(AI.getAIcoordinates()[0]).toBeGreaterThanOrEqual(0);
     expect(AI.getAIcoordinates()[0]).toBeLessThan(10);
     expect(AI.getAIcoordinates()[1]).toBeGreaterThanOrEqual(0)
     expect(AI.getAIcoordinates()[1]).toBeLessThan(10);
   });
-  test("Won't repeat shot", () => {
-    const boardTemplate = Array(10);
-    for(let i = 0; i < boardTemplate.length; i++) {
-      boardTemplate[i] = Array(10).fill(1);
-    }
-    board.init();
-    for(let i = 0; i < 100; i++) {
-      AI.attack();
-    }
-    expect(board.getMap()).toEqual(boardTemplate);
-  });
+  // test("Won't repeat shot", () => {
+  //   const boardTemplate = Array(10);
+  //   for(let i = 0; i < boardTemplate.length; i++) {
+  //     boardTemplate[i] = Array(10).fill(1);
+  //   }
+  //   board.init();
+  //   for(let i = 0; i < 100; i++) {
+  //     AI.attack();
+  //   }
+  //   expect(board.getMap()).toEqual(boardTemplate);
+  // });
 });
