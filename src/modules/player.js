@@ -8,14 +8,15 @@ const player = (moniker, board, typeOfPlayer) => {
   // AI code
   let a;  // for AI coordinates
   let b; 
-  const AImap = Array(10);
+  const AImap = Array(10);  // 0 is unknown, 1 is a miss, 2 is a hit
   for(let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
   }
   const pickCoordinates = () => {
-    a = Math.round(Math.random() * 9);
-    b = Math.round(Math.random() * 9);
-    return ([a, b])
+    do {
+      a = Math.round(Math.random() * 9);
+      b = Math.round(Math.random() * 9);
+    } while(AImap[a][b] !== 0);
   }
   const attack = (x, y) => {
     // Human attack
@@ -24,10 +25,11 @@ const player = (moniker, board, typeOfPlayer) => {
     
     // AI attack branch
     } else {  
-      boardOfAttack.incoming(...pickCoordinates());
+      pickCoordinates();
+      boardOfAttack.incoming(a, b);
     }
   };
-  const getAIcoordinates = () => [a, b];
+  const getAIcoordinates = () => [a, b];  // This may be able to be deleted???
   return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack, getAIcoordinates }
 }
 

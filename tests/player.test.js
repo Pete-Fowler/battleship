@@ -46,15 +46,15 @@ describe('AI player', () => {
     expect(AI.getAIcoordinates()[1]).toBeGreaterThanOrEqual(0)
     expect(AI.getAIcoordinates()[1]).toBeLessThan(10);
   });
-  // test("Won't repeat shot", () => {
-  //   const boardTemplate = Array(10);
-  //   for(let i = 0; i < boardTemplate.length; i++) {
-  //     boardTemplate[i] = Array(10).fill(1);
-  //   }
-  //   board.init();
-  //   for(let i = 0; i < 100; i++) {
-  //     AI.attack();
-  //   }
-  //   expect(board.getMap()).toEqual(boardTemplate);
-  // });
+  test("Won't repeat shot", () => {
+    const boardTemplate = Array(10);
+    for(let i = 0; i < boardTemplate.length; i++) {
+      boardTemplate[i] = Array(10).fill(1);
+    }
+    board.init();
+    for(let i = 0; i < 100; i++) {
+      AI.attack();
+    }
+    expect(board.getMap()).toEqual(boardTemplate);
+  });
 });
