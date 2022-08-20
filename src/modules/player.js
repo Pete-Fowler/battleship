@@ -4,11 +4,16 @@ const player = (moniker, board, typeOfPlayer) => {
   const boardOfAttack = board;
   const isCurrentTurn = false;
   const getTurn = () => isCurrentTurn;
-  let a, b;  // for AI coordinates
+  let a;  // for AI coordinates
+  let b; 
+  const AImap = Array(10);
+  for(let i = 0; i < AImap.length; i += 1) {
+    AImap[i] = Array(10).fill(0);
+  }
   const attack = (x, y) => {
     if(typeOfPlayer === 'human') {
       boardOfAttack.incoming(x, y)
-    } else {
+    } else {  // AI branch
       const attacks = [];
       a = Math.round(Math.random() * 9);
       b = Math.round(Math.random() * 9);
