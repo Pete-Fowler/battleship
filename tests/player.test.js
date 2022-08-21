@@ -63,10 +63,11 @@ describe('AI player', () => {
     board.init();
     const AI = player('Gustov', board, 'AI');
     const sub = makeShip('sub');
-    board.place(sub, 4, 5, 'y');
+    board.place(sub, 4, 5, 'x');
     do {
       AI.attack();
     } while(board.getLastShotHit() === false);
+    console.log('before', board.getMap(), sub.getHull());
     const [ a, b ] = AI.getLastShot();
     AI.attack();
     const [ x, y ] = AI.getLastShot();
@@ -82,11 +83,6 @@ describe('AI player', () => {
     if(b === y && x < a) {
       expect(a).toEqual(x + 1);
     }
-    // give ai a hit
-    // test if it fire adjacent
-    // so incoming can return true or false for if a ship was hit
-    // if it's true on an AI attack, then it will attack adjacent next time
-    // to do this, it will store the coords in nextShot
-    // 
+    console.log('after', board.getMap(), sub.getHull());
   });
 });

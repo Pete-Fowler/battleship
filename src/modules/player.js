@@ -34,11 +34,35 @@ const player = (moniker, board, typeOfPlayer) => {
     */
 
     let [ i, j ] = lastShot;
-    
-    
-    
-    AImap[a][b] = 1;
-    lastShot = [a, b];
+    if(AImap[i + 1][j] === 0) {
+      a = i + 1;
+      b = j;
+      AImap[a][b] = 1;
+      lastShot = [a, b];
+      return;
+    }
+    if(AImap[i - 1][j] === 0) {
+      a = i - 1;
+      b = j;
+      AImap[a][b] = 1;
+      lastShot = [a, b];
+      return;
+    }
+    if(AImap[i][j + 1] === 0) {
+      a = i;
+      b = j + 1;
+      AImap[a][b] = 1;
+      lastShot = [a, b];
+      return;
+    }
+    if(AImap[i][j - 1] === 0) {
+      a = i;
+      b = j - 1;
+      AImap[a][b] = 1;
+      lastShot = [a, b];
+      return;
+    }
+    pickCoordinates();
   }
   const attack = (x, y) => {
     // Human attack
@@ -46,15 +70,15 @@ const player = (moniker, board, typeOfPlayer) => {
       boardOfAttack.incoming(x, y);
 
       // AI attack branch
-    } else {
-      if(boardOfAttack.getLastShotHit()) {
+    } else if(boardOfAttack.getLastShotHit()) {
         pickAdjacentCoordinates();
         boardOfAttack.incoming(a, b);
+      } else {
+        pickCoordinates();
+        boardOfAttack.incoming(a, b);
       }
-      pickCoordinates();
-      boardOfAttack.incoming(a, b);
     }
-  };
+  
   return {
     name,
     type,
