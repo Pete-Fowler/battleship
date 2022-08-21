@@ -24,6 +24,7 @@ const player = (moniker, board, typeOfPlayer) => {
       b = Math.round(Math.random() * 9);
     } while (AImap[a][b] !== 0);
     AImap[a][b] = 1;
+    lastShot = [a, b];
   };
   const attack = (x, y) => {
     // Human attack
