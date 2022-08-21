@@ -1,6 +1,8 @@
 const gameBoard = () => {
   let map;
   let sunkShips = 0;
+  let lastShotHit = false;
+  const getLastShotHit = () => lastShotHit;
   const init = () => {
     sunkShips = 0;
     map = Array(10);
@@ -44,11 +46,12 @@ const gameBoard = () => {
     if (typeof map[x][y] === "object") {
       [ship, hullIndex] = map[x][y]; // 0 is ship object, 1 is hull index. see place()
       ship.hit(hullIndex);
+      lastShotHit = true;
       testIfSunk(ship);
-      return true;
-    }
+    } else {
       map[x][y] = 1;
-      return false;
+      lastShotHit = false;
+    }
   };
   const getSunkShips = () => sunkShips;
   return {
@@ -60,6 +63,7 @@ const gameBoard = () => {
     testIfSunk,
     incoming,
     getSunkShips,
+    getLastShotHit,
   };
 };
 
