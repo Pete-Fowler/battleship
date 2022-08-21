@@ -18,8 +18,8 @@ const player = (moniker, board, typeOfPlayer) => {
   const getMap = () => AImap;
   const pickCoordinates = () => {
     do {
-      a = Math.round(Math.random() * 9);
-      b = Math.round(Math.random() * 9);
+      a = Math.floor(Math.random() * 9);
+      b = Math.floor(Math.random() * 9);
     } while (AImap[a][b] !== 0);
     AImap[a][b] = 1;
     lastShot = [a, b];
@@ -32,37 +32,23 @@ const player = (moniker, board, typeOfPlayer) => {
       if not, test next spot, etc. repeat
     if not possible, call pickCoordinates 
     */
-
     let [ i, j ] = lastShot;
-    if(AImap[i + 1][j] === 0) {
-      a = i + 1;
-      b = j;
+    const adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
+    
+    // If no adjacent shots available, generate random shot and exit function
+    if(AImap[i + 1][j] !== 0 && AImap[i - 1][j] !== 0 && 
+      AImap[i][j + 1] !== 0 && AImap[i][j - 1] !== 0) {
+        pickCoordinates();
+        return;
+      }
+    
+    // Otherwise, randomly pick an adjacent shot
+    do {
+      a = Math.floor(Math.random() * 9);
+      b = Math.floor(Math.random() * 9);
+    } while (adjacentShots.includes([a, b]));
       AImap[a][b] = 1;
       lastShot = [a, b];
-      return;
-    }
-    if(AImap[i - 1][j] === 0) {
-      a = i - 1;
-      b = j;
-      AImap[a][b] = 1;
-      lastShot = [a, b];
-      return;
-    }
-    if(AImap[i][j + 1] === 0) {
-      a = i;
-      b = j + 1;
-      AImap[a][b] = 1;
-      lastShot = [a, b];
-      return;
-    }
-    if(AImap[i][j - 1] === 0) {
-      a = i;
-      b = j - 1;
-      AImap[a][b] = 1;
-      lastShot = [a, b];
-      return;
-    }
-    pickCoordinates();
   }
   const attack = (x, y) => {
     // Human attack

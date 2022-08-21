@@ -63,14 +63,15 @@ describe('AI player', () => {
     board.init();
     const AI = player('Gustov', board, 'AI');
     const sub = makeShip('sub');
-    board.place(sub, 4, 5, 'x');
+    board.place(sub, 3, 3, 'y');
     do {
       AI.attack();
     } while(board.getLastShotHit() === false);
-    console.log('before', board.getMap(), sub.getHull());
     const [ a, b ] = AI.getLastShot();
+    console.log(a, b);
     AI.attack();
     const [ x, y ] = AI.getLastShot();
+    console.log(x, y);
     if(a === x && y > b) {
       expect(b).toEqual(y - 1);
     }
@@ -83,6 +84,5 @@ describe('AI player', () => {
     if(b === y && x < a) {
       expect(a).toEqual(x + 1);
     }
-    console.log('after', board.getMap(), sub.getHull());
   });
 });
