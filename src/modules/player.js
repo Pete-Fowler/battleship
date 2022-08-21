@@ -9,6 +9,10 @@ const player = (moniker, board, typeOfPlayer) => {
   let a;
   let b;
   const getAIcoordinates = () => [a, b];
+  let lastShot;
+  const getLastShot = () => lastShot;
+  let lastShotHit = false;
+  const getLastShotHit = () => lastShotHit;
   const AImap = Array(10); // 0 is unknown, 1 is miss, 2 is hit
   for (let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
@@ -41,6 +45,8 @@ const player = (moniker, board, typeOfPlayer) => {
     attack,
     getAIcoordinates,
     getMap,
+    getLastShot,
+    getLastShotHit
   };
 };
 
