@@ -8,6 +8,8 @@ const player = (moniker, board, typeOfPlayer) => {
   // AI data
   let a;  
   let b; 
+  const getAIcoordinates = () => [a, b];
+  const getMap = () => AImap;  // This may be able to be deleted???
   const AImap = Array(10);  // 0 is unknown, 1 is miss, 2 is hit
   for(let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
@@ -31,8 +33,6 @@ const player = (moniker, board, typeOfPlayer) => {
       boardOfAttack.incoming(a, b);
     }
   };
-  const getAIcoordinates = () => [a, b];
-  const getMap = () => AImap;  // This may be able to be deleted???
   return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack, getAIcoordinates, getMap }
 }
 
