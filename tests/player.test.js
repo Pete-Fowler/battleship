@@ -71,18 +71,9 @@ describe('AI player', () => {
     console.log(a, b);
     AI.attack();
     const [ x, y ] = AI.getLastShot();
+    const adjacent = [[a + 1, b], [a - 1, b], [a, b + 1], [a, b - 1]];
+    console.log(adjacent); 
     console.log(x, y);
-    if(a === x && y > b) {
-      expect(b).toEqual(y - 1);
-    }
-    if(a === x && y < b) {
-      expect(b).toEqual(y + 1);
-    }
-    if(b === y && x > a) {
-      expect(a).toEqual(x - 1);
-    }
-    if(b === y && x < a) {
-      expect(a).toEqual(x + 1);
-    }
+    expect(adjacent.includes([x, y])).toEqual(true);
   });
 });

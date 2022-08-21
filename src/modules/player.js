@@ -18,8 +18,8 @@ const player = (moniker, board, typeOfPlayer) => {
   const getMap = () => AImap;
   const pickCoordinates = () => {
     do {
-      a = Math.floor(Math.random() * 9);
-      b = Math.floor(Math.random() * 9);
+      a = Math.floor(Math.random() * 10);
+      b = Math.floor(Math.random() * 10);
     } while (AImap[a][b] !== 0);
     AImap[a][b] = 1;
     lastShot = [a, b];
@@ -44,8 +44,9 @@ const player = (moniker, board, typeOfPlayer) => {
     
     // Otherwise, randomly pick an adjacent shot
     do {
-      a = Math.floor(Math.random() * 9);
-      b = Math.floor(Math.random() * 9);
+      a = Math.floor(Math.random() * 10);
+      b = Math.floor(Math.random() * 10);
+      console.log(adjacentShots.includes([a, b]));
     } while (adjacentShots.includes([a, b]));
       AImap[a][b] = 1;
       lastShot = [a, b];
