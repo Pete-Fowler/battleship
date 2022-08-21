@@ -4,37 +4,45 @@ const player = (moniker, board, typeOfPlayer) => {
   const boardOfAttack = board;
   const isCurrentTurn = false;
   const getTurn = () => isCurrentTurn;
-  
+
   // AI data
-  let a;  
-  let b; 
+  let a;
+  let b;
   const getAIcoordinates = () => [a, b];
-  const getMap = () => AImap;  // This may be able to be deleted???
-  const AImap = Array(10);  // 0 is unknown, 1 is miss, 2 is hit
-  for(let i = 0; i < AImap.length; i += 1) {
+  const AImap = Array(10); // 0 is unknown, 1 is miss, 2 is hit
+  for (let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
   }
+  const getMap = () => AImap;
   const pickCoordinates = () => {
-    
-    do { 
+    do {
       a = Math.round(Math.random() * 9);
       b = Math.round(Math.random() * 9);
-    } while(AImap[a][b] !== 0);
+    } while (AImap[a][b] !== 0);
     AImap[a][b] = 1;
-  }
+  };
   const attack = (x, y) => {
     // Human attack
-    if(typeOfPlayer === 'human') {
-      boardOfAttack.incoming(x, y)
-    
-    // AI attack branch
-    } else {  
+    if (typeOfPlayer === "human") {
+      boardOfAttack.incoming(x, y);
+
+      // AI attack branch
+    } else {
       pickCoordinates();
       boardOfAttack.incoming(a, b);
     }
   };
-  return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack, getAIcoordinates, getMap }
-}
+  return {
+    name,
+    type,
+    boardOfAttack,
+    isCurrentTurn,
+    getTurn,
+    attack,
+    getAIcoordinates,
+    getMap,
+  };
+};
 
 export default player;
 
