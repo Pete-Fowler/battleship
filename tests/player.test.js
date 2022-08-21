@@ -35,8 +35,9 @@ describe('AI player', () => {
   }
   const board = gameBoard();
   board.init();
-  const AI = player('Gustov', board, 'AI')
+  
   test('Fires a shot', () => {
+    const AI = player('Gustov', board, 'AI')
     const sub = makeShip('sub');
     board.place(sub, 0, 0, 'y');
     AI.attack();
@@ -52,6 +53,7 @@ describe('AI player', () => {
       boardTemplate[i] = Array(10).fill(1);
     }
     board.init();
+    const AI = player('Gustov', board, 'AI')
     for(let i = 0; i < 100; i++) {
       AI.attack();
     }

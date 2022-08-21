@@ -5,18 +5,20 @@ const player = (moniker, board, typeOfPlayer) => {
   const isCurrentTurn = false;
   const getTurn = () => isCurrentTurn;
   
-  // AI code
-  let a;  // for AI coordinates
+  // AI data
+  let a;  
   let b; 
   const AImap = Array(10);  // 0 is unknown, 1 is miss, 2 is hit
   for(let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
   }
   const pickCoordinates = () => {
-    do {
+    
+    do { 
       a = Math.round(Math.random() * 9);
       b = Math.round(Math.random() * 9);
     } while(AImap[a][b] !== 0);
+    AImap[a][b] = 1;
   }
   const attack = (x, y) => {
     // Human attack
@@ -26,12 +28,12 @@ const player = (moniker, board, typeOfPlayer) => {
     // AI attack branch
     } else {  
       pickCoordinates();
-      // AImap[a][b] = 1;       -- this code is making it hang
       boardOfAttack.incoming(a, b);
     }
   };
-  const getAIcoordinates = () => [a, b];  // This may be able to be deleted???
-  return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack, getAIcoordinates }
+  const getAIcoordinates = () => [a, b];
+  const getMap = () => AImap;  // This may be able to be deleted???
+  return { name, type, boardOfAttack, isCurrentTurn, getTurn, attack, getAIcoordinates, getMap }
 }
 
 export default player;
@@ -41,6 +43,7 @@ AI ATTACK
   create 1 branch for existing player attack
   create 2nd branch for AI player attack
     generate random x, y coordinates, each 0-9
+    check if already used
     attack the board at x, y
     if hit
       attack adjacent
