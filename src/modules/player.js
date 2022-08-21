@@ -24,6 +24,22 @@ const player = (moniker, board, typeOfPlayer) => {
     AImap[a][b] = 1;
     lastShot = [a, b];
   };
+  const pickAdjacentCoordinates = () => {
+    /*
+    make a shot adjacent to last shot
+      check each adjacent spot
+      if open for shot, use it
+      if not, test next spot, etc. repeat
+    if not possible, call pickCoordinates 
+    */
+
+    let [ i, j ] = lastShot;
+    
+    
+    
+    AImap[a][b] = 1;
+    lastShot = [a, b];
+  }
   const attack = (x, y) => {
     // Human attack
     if (typeOfPlayer === "human") {
@@ -31,6 +47,10 @@ const player = (moniker, board, typeOfPlayer) => {
 
       // AI attack branch
     } else {
+      if(boardOfAttack.getLastShotHit()) {
+        pickAdjacentCoordinates();
+        boardOfAttack.incoming(a, b);
+      }
       pickCoordinates();
       boardOfAttack.incoming(a, b);
     }
