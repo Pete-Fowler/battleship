@@ -63,7 +63,7 @@ describe('AI player', () => {
     board.init();
     const AI = player('Gustov', board, 'AI');
     const sub = makeShip('sub');
-    board.place(sub, 3, 3, 'y');
+    board.place(sub, 0, 0, 'y');
     do {
       AI.attack();
     } while(board.getLastShotHit() === false);

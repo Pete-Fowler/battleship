@@ -25,11 +25,37 @@ const player = (moniker, board, typeOfPlayer) => {
     lastShot = [a, b];
   };
   const pickAdjacentCoordinates = () => {
-    let [ i, j ] = lastShot;    // must write code to limit for edge of board
-    const adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
+    let [ i, j ] = lastShot;    
+    let adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
+
+    // Code to limit possible shots for edge of board   
+    if(i === 0 && j === 0) {
+      adjacentShots = [[i + 1, j], [i, j + 1]];
+    } else
+    if(i === 9 && j === 9) {
+      adjacentShots = [[i - 1, j], [i, j - 1]];
+    } else
+    if(i === 0 && j === 9) {
+      adjacentShots = [[i + 1, j], [i, j - 1]];
+    } else
+    if(i === 9 && j === 0) {
+      adjacentShots = [[i - 1, j], [i, j + 1]];
+    } else
+    if(i === 0) {
+      adjacentShots = [[i + 1, j], [i, j + 1], [i, j - 1]];
+    } else
+    if(i === 9) {
+      adjacentShots = [[i - 1, j], [i, j + 1], [i, j - 1]];
+    } else
+    if(j === 0) {
+      adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1]];
+    } else
+    if(j === 9) {
+      adjacentShots = [[i + 1, j], [i - 1, j], [i, j - 1]];
+    } 
 
     // If no adjacent shots available, generate random shot and exit function
-    if(AImap[i + 1][j] !== 0 && AImap[i - 1][j] !== 0 && 
+    if(AImap[i + 1][j] !== 0 && AImap[i - 1][j] !== 0 && // rewrite this to iterate adjacentshots
       AImap[i][j + 1] !== 0 && AImap[i][j - 1] !== 0) {
         pickCoordinates();
         return;
