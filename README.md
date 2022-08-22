@@ -5,3 +5,5 @@ toEqual is used for testing of arrays. toBe would only match if it is the same l
 Array.prototype.fill() with object passes reference and not new instance
 The contents of the first fill is only evaluating once - creating the second array, and then it is duplicating that array 7 times, so they are all connected.
 
+Cannot compare 2 arrays??? Used JSON.stringify() on arrays in the AI adjacent shot function.
+
