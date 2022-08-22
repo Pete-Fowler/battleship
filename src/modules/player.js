@@ -25,16 +25,9 @@ const player = (moniker, board, typeOfPlayer) => {
     lastShot = [a, b];
   };
   const pickAdjacentCoordinates = () => {
-    /*
-    make a shot adjacent to last shot
-      check each adjacent spot
-      if open for shot, use it
-      if not, test next spot, etc. repeat
-    if not possible, call pickCoordinates 
-    */
-    let [ i, j ] = lastShot;
+    let [ i, j ] = lastShot;    // must write code to limit for edge of board
     const adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
-    
+
     // If no adjacent shots available, generate random shot and exit function
     if(AImap[i + 1][j] !== 0 && AImap[i - 1][j] !== 0 && 
       AImap[i][j + 1] !== 0 && AImap[i][j - 1] !== 0) {
@@ -46,8 +39,7 @@ const player = (moniker, board, typeOfPlayer) => {
     do {
       a = Math.floor(Math.random() * 10);
       b = Math.floor(Math.random() * 10);
-      console.log(adjacentShots.includes([a, b]));
-    } while (adjacentShots.includes([a, b]));
+    } while (!adjacentShots.toString().includes([a, b].toString()));
       AImap[a][b] = 1;
       lastShot = [a, b];
   }
