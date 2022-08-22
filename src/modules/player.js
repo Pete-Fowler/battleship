@@ -54,9 +54,14 @@ const player = (moniker, board, typeOfPlayer) => {
       adjacentShots = [[i + 1, j], [i - 1, j], [i, j - 1]];
     } 
 
+    // Test is true if there is an adjacent shot available (a zero)
+    const test = adjacentShots.some(xy => {
+      const [ x, y ] = xy;
+      return AImap[x][y] === 0;
+    });
+
     // If no adjacent shots available, generate random shot and exit function
-    if(AImap[i + 1][j] !== 0 && AImap[i - 1][j] !== 0 && // rewrite this to iterate adjacentshots
-      AImap[i][j + 1] !== 0 && AImap[i][j - 1] !== 0) {
+    if(test === false) {
         pickCoordinates();
         return;
       }
