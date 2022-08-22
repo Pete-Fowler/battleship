@@ -39,7 +39,7 @@ const player = (moniker, board, typeOfPlayer) => {
     do {
       a = Math.floor(Math.random() * 10);
       b = Math.floor(Math.random() * 10);
-    } while (!adjacentShots.toString().includes([a, b].toString()));
+    } while (!JSON.stringify(adjacentShots).includes(JSON.stringify([a, b])));
       AImap[a][b] = 1;
       lastShot = [a, b];
   }

@@ -73,6 +73,6 @@ describe('AI player', () => {
     const [ x, y ] = AI.getLastShot();
     const adjacent = [[a + 1, b], [a - 1, b], [a, b + 1], [a, b - 1]];
     console.log(x, y);
-    expect(adjacent.includes([x, y])).toEqual(true);
+    expect(JSON.stringify(adjacent).includes(JSON.stringify([x, y]))).toEqual(true);
   });
 });
