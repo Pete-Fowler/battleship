@@ -6,23 +6,43 @@
 body {
   display: grid;
   grid: 
-    'header header' 75px
-    'narrative narrative' 75px
-    'p1     p2' 1fr
-    / 1fr   1fr;
+    'header' 75px
+    'main' 1fr   
+    /1fr;
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
 }
 
+#header {
+  grid-area: header;
+}
+
+#main {
+  grid-area: main;
+  display: grid;
+  grid:
+    'narrative narrative' 75px
+    'p1        p2' 1fr
+    /1fr       1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+#p1 {
+  grid-area: p1;
+}
+
 .board {
+  display: grid;
+  grid: repeat(10, 30px) / repeat(10, 30px);
   gap: 5px;
 }
 
 .square {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background-color: lightgray;
   border-radius: 5px;
   box-shadow: 2px 2px 2px black;

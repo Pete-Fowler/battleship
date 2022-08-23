@@ -18,14 +18,11 @@ import {
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 
-const renderBoard = (board, box, playerString) => {
+const renderBoard = (board, box) => {
   // Outer board container
   const grid = document.createElement('div');
   // grid.id = `${playerString}-board`;
   grid.className = 'board';
-  grid.setAttribute('style', `display: grid;
-                              grid: repeat(10, 40px) / repeat(10, 40px);
-                              grid-area: ${playerString};`);
 
   // Individual squares on board
   for(let i = 0; i <= 9; i += 1) {
