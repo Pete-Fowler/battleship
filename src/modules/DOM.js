@@ -18,10 +18,10 @@ import {
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 
-const renderBoard = (board, player) => {
+const renderBoard = (board, box) => {
   // Outer board container
   const boardBox = document.createElement('div');
-  boardBox.id = `${player.name}-board`;
+  boardBox.id = `${p1.name}-board`;
 
   // Individual squares on board
   for(let i = 0; i <= 9; i += 1) {
@@ -31,7 +31,7 @@ const renderBoard = (board, player) => {
       boardBox.append(square);
     }
   }
-  
+  box.append(boardBox);
 }
 
 // We’ll leave the HTML implementation up to you for now, but you should display
@@ -45,4 +45,4 @@ const renderBoard = (board, player) => {
 // inside the game loop, step back and figure out which class or module that 
 // function should belong to.
 
-export { renderBoard };
+export { renderBoard, p1Box, p2Box, };
