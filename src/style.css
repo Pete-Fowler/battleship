@@ -1,0 +1,30 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  grid: 
+    'header header' 75px
+    'narrative narrative' 75px
+    'p1     p2' 1fr
+    / 1fr   1fr;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  gap: 5px;
+}
+
+.square {
+  width: 40px;
+  height: 40px;
+  background-color: lightgray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+}
+

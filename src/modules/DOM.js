@@ -18,13 +18,14 @@ import {
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 
-const renderBoard = (board, box) => {
+const renderBoard = (board, box, playerString) => {
   // Outer board container
   const grid = document.createElement('div');
-  grid.id = `${p1.name}-board`;
+  // grid.id = `${playerString}-board`;
+  grid.className = 'board';
   grid.setAttribute('style', `display: grid;
-                              grid-template-rows: repeat(10, 1fr);
-                              grid-template-columns: repeat(10, 1fr);`);
+                              grid: repeat(10, 40px) / repeat(10, 40px);
+                              grid-area: ${playerString};`);
 
   // Individual squares on board
   for(let i = 0; i <= 9; i += 1) {
