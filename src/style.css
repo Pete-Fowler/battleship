@@ -34,6 +34,10 @@ body {
   grid-area: p1;
 }
 
+#p2 {
+  grid-area: p2;
+}
+
 .board {
   display: grid;
   grid: repeat(10, 30px) / repeat(10, 30px);
