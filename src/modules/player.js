@@ -103,16 +103,3 @@ const player = (moniker, board, typeOfPlayer) => {
 };
 
 export default player;
-
-/*
-AI ATTACK
-  create 1 branch for existing player attack
-  create 2nd branch for AI player attack
-    generate random x, y coordinates, each 0-9
-    check if already used
-    attack the board at x, y
-    if hit
-      attack adjacent
-    if missed
-      store location and attack another random location that excludes existing misses or hits
-*/
