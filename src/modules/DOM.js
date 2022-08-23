@@ -20,19 +20,27 @@ const p2Box = document.querySelector('#p2');
 
 const renderBoard = (board, box) => {
   // Outer board container
-  const boardBox = document.createElement('div');
-  boardBox.id = `${p1.name}-board`;
+  const grid = document.createElement('div');
+  grid.id = `${p1.name}-board`;
+  grid.setAttribute('style', `display: grid;
+                              grid-template-rows: repeat(10, 1fr);
+                              grid-template-columns: repeat(10, 1fr);`);
 
   // Individual squares on board
   for(let i = 0; i <= 9; i += 1) {
     for(let j = 0; j <= 9; j += 1) {
       const square = document.createElement('div');
+      square.className = 'square';
       square.textContent = board.getMap()[i][j];
-      boardBox.append(square);
+      grid.append(square);
     }
   }
-  box.append(boardBox);
+  box.append(grid);
 }
+
+// this is rendering one div after the other
+// it needs to rows of 10
+// it could render rows in the outer loop, 
 
 // We’ll leave the HTML implementation up to you for now, but you should display
 // both the player’s boards and render them using information from the Gameboard
