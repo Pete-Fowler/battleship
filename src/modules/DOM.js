@@ -27,7 +27,7 @@ const renderBoard = (board, box) => {
   for(let i = 0; i <= 9; i += 1) {
     for(let j = 0; j <= 9; j += 1) {
       const square = document.createElement('div');
-      square.textContent = board.getMap[i][j];
+      square.textContent = board.getMap()[i][j];
       boardBox.append(square);
     }
   }
@@ -40,9 +40,6 @@ const renderBoard = (board, box) => {
 
 // You need methods to render the gameboards and to take user input for attacking.
 // For attacks, let the user click on a coordinate in the enemy Gameboard.
-// The game loop should step through the game turn by turn using only methods 
-// from other objects. If at any point you are tempted to write a new function 
-// inside the game loop, step back and figure out which class or module that 
-// function should belong to.
+
 
 export { renderBoard, p1Box, p2Box, };
