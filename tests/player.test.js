@@ -63,16 +63,14 @@ describe('AI player', () => {
     board.init();
     const AI = player('Gustov', board, 'AI');
     const sub = makeShip('sub');
-    board.place(sub, 0, 0, 'y');
+    board.place(sub, 6, 9, 'x');
     do {
       AI.attack();
     } while(board.getLastShotHit() === false);
     const [ a, b ] = AI.getLastShot();
-    console.log(a, b);
     AI.attack();
     const [ x, y ] = AI.getLastShot();
     const adjacent = [[a + 1, b], [a - 1, b], [a, b + 1], [a, b - 1]];
-    console.log(x, y);
     expect(JSON.stringify(adjacent).includes(JSON.stringify([x, y]))).toEqual(true);
   });
 });
