@@ -1,5 +1,5 @@
-import gameBoard from './modules/gameBoard';
-import player from './modules/player';
+import gameBoard from './gameBoard';
+import player from './player';
 
 
 const gameLoop = (() => {
