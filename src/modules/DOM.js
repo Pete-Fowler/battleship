@@ -1,18 +1,18 @@
 import {
-  playerBoard,
-  AIBoard,
+  p1Board,
+  p2Board,
   p1,
-  AI,
+  p2,
   p1Ptb,
   p1Sub,
   p1Destroyer,
   p1Battleship,
   p1Carrier,
-  AIPtb,
-  AISub,
-  AIDestroyer,
-  AIBattleship,
-  AICarrier
+  p2Ptb,
+  p2Sub,
+  p2Destroyer,
+  p2Battleship,
+  p2Carrier
 } from './game';
 
 const p1Box = document.querySelector('#p1');
