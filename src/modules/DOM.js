@@ -29,6 +29,8 @@ const renderBoard = (board, box) => {
     for(let j = 0; j <= 9; j += 1) {
       const square = document.createElement('div');
       square.className = 'square';
+      square.dataset.x = i;
+      square.dataset.y = j;
       square.textContent = board.getMap()[i][j];
       grid.append(square);
     }
@@ -36,9 +38,11 @@ const renderBoard = (board, box) => {
   box.append(grid);
 }
 
-// this is rendering one div after the other
-// it needs to rows of 10
-// it could render rows in the outer loop, 
+const userAttack = () => {
+  const squares = document.querySelectorAll('.square');
+  squares.forEach()
+}
+
 
 // We’ll leave the HTML implementation up to you for now, but you should display
 // both the player’s boards and render them using information from the Gameboard
