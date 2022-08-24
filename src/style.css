@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Oxanium&display=swap');
 
 * {
   box-sizing: border-box;
@@ -16,10 +17,16 @@ body {
 }
 
 #header {
+  display: flex;
+  font-size: 6vw;
+  justify-content: center;
+  align-items: center;
   grid-area: header;
+  font-family: 'Black Ops One', cursive;
 }
 
 #main {
+  font-family: 'Oxanium', cursive;
   grid-area: main;
   display: grid;
   grid:
@@ -28,6 +35,15 @@ body {
     /1fr       1fr;
   justify-items: center;
   align-items: center;
+}
+
+#narrative {
+  font-size: 4vw;
+  grid-area: narrative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 #p1 {
