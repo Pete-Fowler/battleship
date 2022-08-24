@@ -23,6 +23,7 @@ body {
   align-items: center;
   grid-area: header;
   font-family: 'Black Ops One', cursive;
+  padding-top: 10px;
 }
 
 #main {
@@ -56,13 +57,13 @@ body {
 
 .board {
   display: grid;
-  grid: repeat(10, 30px) / repeat(10, 30px);
+  grid: repeat(10, 2.5vw) / repeat(10, 2.5vw);
   gap: 5px;
 }
 
 .square {
-  width: 30px;
-  height: 30px;
+  width: 2.5vw;
+  height: 2.5vw;
   background-color: lightgray;
   border-radius: 5px;
   box-shadow: 2px 2px 2px black;
