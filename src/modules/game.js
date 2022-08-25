@@ -30,27 +30,32 @@ const p2Destroyer = makeShip('destroyer');
 const p2Battleship = makeShip('battleship');
 const p2Carrier = makeShip('carrier');
 
-// Place ships *** will need editing for player control
+// Render Board
+renderBoard(p1Board, p1Box);
+renderBoard(p2Board, p2Box);
+
+// Player place ships *** will need editing for player control
 p1Board.place(p1Ptb, 2, 0, 'x');  
 p1Board.place(p1Sub, 7, 2, 'x');
 p1Board.place(p1Destroyer, 2, 4, 'x');
 p1Board.place(p1Battleship, 6, 6, 'x');
-p1Board.place(p1Carrier, 4, 8, 'x');
+// p1Board.place(p1Carrier, 4, 8, 'x');
 
+// AI place ships
 p2Board.place(p2Ptb, 0, 1, 'y');
 p2Board.place(p2Sub, 2, 6, 'y');
 p2Board.place(p2Destroyer, 4, 2, 'y');
 p2Board.place(p2Battleship, 6, 6, 'y');
 p2Board.place(p2Carrier, 8, 4, 'y');
 
-// Render Board. Will need to do this before placing ships
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
 // MAIN GAME LOOP - will need loop
 
 // Player attack
-UIAttack(p2Board);
+// UIAttack(p2Board);
+playerPlaceShip(p1Board, p1Carrier);
 
 // AI attack
 

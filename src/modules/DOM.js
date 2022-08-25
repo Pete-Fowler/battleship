@@ -3,11 +3,26 @@ const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
-// Helper functions for UIPlayerPlace
+let axis = 'x';   // used to render shadow in playerPlaceShip
+
+
+// Helper functions for playerPlaceShip
+const renderShadow = (e, length) => {
+  let { x, y } = e.target.dataset;
+  x = parseInt(x, 10);
+  y = parseInt(y, 10);
+  for(let i = 0; i < length; i += 1) {
+    if(axis === 'x') {
+      document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`)
+      .classList.add('hovered'); 
+    }
+  }
+}
+// shade length along axis
 
 // Lets player place ship
 const playerPlaceShip = (board, ship) => {
-  const squares = document.querySelector('#p1 .board .square');
+  const squares = document.querySelectorAll('#p1 .board .square');
 
     squares.forEach(square => {
       square.addEventListener('mouseover', (e) => renderShadow(e, ship.length));
@@ -39,7 +54,7 @@ const AIPlaceShip = (board) => {
 
 const renderBoard = (board, box) => {
   // Clear old content prior to re-render if needed
-  let grid = document.querySelector(`${box.id} .board`);
+  let grid = document.querySelector(`#${box.id} .board`);
   if(grid) {
     grid.textContent = '';
   } else {
@@ -69,6 +84,7 @@ const attackCallback = (e, board) => {
     el.removeEventListener('click', attackCallback);
     el.classList.remove('hoverable');
   });
+  console.log(board.getMap());
 }
 
 // Player attack phase - adds click event listener and hover effect 
