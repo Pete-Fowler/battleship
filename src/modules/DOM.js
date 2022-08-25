@@ -5,7 +5,7 @@ const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
 let axis = 'y';   // used to render shadow in playerPlaceShip
-let lastShadow;
+let lastCoords;
 
 // Helper functions for playerPlaceShip
 const switchAxis = () => {
@@ -25,10 +25,18 @@ const renderShadow = (e, fill, length) => {
       fill === true ? el.classList.add('hovered') : el.classList.remove('hovered');
     }
   }
-  lastShadow = e;
+  lastCoords = e;
 }
 
-// Lets player place ship
+const clickToPlace = (e, board, ship) => {
+  let { x, y } = e.target.dataset;
+  x = parseInt(x, 10);
+  y = parseInt(y, 10)
+  board.place(ship, x, y, axis);
+  console.log(board.getMap());
+}
+
+// Main function for player to place ship
 const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll('#p1 .board .square');
   narrative.textContent = `Lead your ${ship.type} into battle. Press X to steer.`;
@@ -36,14 +44,14 @@ const playerPlaceShip = (board, ship) => {
     squares.forEach(square => {
       square.addEventListener('mouseover', (e) => renderShadow(e, true, ship.length));
       square.addEventListener('mouseout', (e) => renderShadow(e, false, ship.length));
-      // square.addEventListener('click', () => board.place(ship, x, y, axis));
+      square.addEventListener('click', (e) => clickToPlace(e, board, ship));
     });
 
     window.addEventListener('keydown', (e) => {
       if(e.key === 'x') {
         switchAxis();
         squares.forEach(square => square.classList.remove('hovered'));
-        renderShadow(lastShadow, true, ship.length);
+        renderShadow(lastCoords, true, ship.length);
       }
     });
 }
