@@ -28,7 +28,7 @@ const p2Battleship = makeShip('battleship');
 const p2Carrier = makeShip('carrier');
 
 // Place ships ***************Will need editing for player control
-p1Board.place(p1Ptb, 2, 0, 'x');    // this is causing undefined on map[a][b]
+p1Board.place(p1Ptb, 2, 0, 'x');  
 p1Board.place(p1Sub, 7, 2, 'x');
 p1Board.place(p1Destroyer, 2, 4, 'x');
 p1Board.place(p1Battleship, 6, 6, 'x');

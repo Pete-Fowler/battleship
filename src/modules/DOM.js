@@ -4,10 +4,14 @@ const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
 const renderBoard = (board, box) => {
-  // Outer board container
-  const grid = document.createElement('div');
-  grid.className = 'board';
-
+  // Clear old content prior to re-render if needed
+  let grid = document.querySelector(`${box.id} .board`);
+  if(grid) {
+    grid.textContent = '';
+  } else {
+    grid = document.createElement('div');
+    grid.className = 'board';
+  }
   // Individual squares on board
   for(let i = 0; i <= 9; i += 1) {
     for(let j = 9; j >= 0; j -= 1) {
