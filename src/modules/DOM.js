@@ -21,12 +21,11 @@ const p2Box = document.querySelector('#p2');
 const renderBoard = (board, box) => {
   // Outer board container
   const grid = document.createElement('div');
-  // grid.id = `${playerString}-board`;
   grid.className = 'board';
 
   // Individual squares on board
   for(let i = 0; i <= 9; i += 1) {
-    for(let j = 0; j <= 9; j += 1) {
+    for(let j = 9; j >= 0; j -= 1) {
       const square = document.createElement('div');
       square.className = 'square';
       square.dataset.x = i;

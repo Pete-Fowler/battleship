@@ -58,6 +58,7 @@ body {
 .board {
   display: grid;
   grid: repeat(10, 2.5vw) / repeat(10, 2.5vw);
+  grid-auto-flow: column;
   gap: 5px;
 }
 
