@@ -1,7 +1,7 @@
 import gameBoard from "./gameBoard";
 import player from "./player";
 import makeShip from './ship';
-import { p1Box, p2Box, x, y, renderBoard, UIAttack } from "./DOM";
+import { p1Box, p2Box, renderBoard, UIAttack } from "./DOM";
 
 // Make game boards
 const p1Board = gameBoard();
@@ -43,9 +43,10 @@ p2Board.place(p2Carrier, 8, 4, 'y');
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
-UIAttack();
-p2Board.incoming(x, y);               // This is causing an error
-console.log(p2Board.getMap(x, y));
+UIAttack(p2Board);
+
+
+//  UI Attack adds the event listener and hoverable class. attackCallback() 
 
 
 // The game loop should set up a new game by creating Players and Gameboards.

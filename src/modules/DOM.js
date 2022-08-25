@@ -2,8 +2,6 @@
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
-let x;
-let y;
 
 const renderBoard = (board, box) => {
   // Outer board container
@@ -25,22 +23,23 @@ const renderBoard = (board, box) => {
 }
 
 // Player attack phase - sends x, y from clicked square to board.incoming()
-const attackCallback = (e) => {
-  x = e.target.dataset.x;
-  y = e.target.dataset.y;
+const attackCallback = (e, board) => {
+  const x = e.target.dataset.x;
+  const y = e.target.dataset.y;
+  console.log(e.target);
+  board.incoming(x, y);
   const squares = document.querySelectorAll('#p2 .square');
   squares.forEach(el => {
     el.removeEventListener('click', attackCallback);
     el.classList.remove('hoverable');
   });
-  console.log(x, y);
-}
+  console.log(board.getMap(x, y));}
 
 // Player attack phase - adds click event listener and hover effect 
-const UIAttack = () => {
+const UIAttack = (board) => {
   const squares = document.querySelectorAll('#p2 .square');
   squares.forEach(el => {
-    el.addEventListener('click', attackCallback);
+    el.addEventListener('click', (e) => attackCallback(e, board));
     el.classList.add('hoverable');
   });
   narrative.textContent = 'Click to fire on the enemy fleet';
@@ -51,4 +50,4 @@ const UIAttack = () => {
 // on a coordinate in the enemy Gameboard.
 
 
-export { p1Box, p2Box, x, y, renderBoard, UIAttack };
+export { p1Box, p2Box, renderBoard, UIAttack };
