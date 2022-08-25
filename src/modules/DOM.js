@@ -5,6 +5,7 @@ const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
 let axis = 'y';   // used to render shadow in playerPlaceShip
+let lastShadow;
 
 // Helper functions for playerPlaceShip
 const switchAxis = () => {
@@ -24,6 +25,7 @@ const renderShadow = (e, fill, length) => {
       fill === true ? el.classList.add('hovered') : el.classList.remove('hovered');
     }
   }
+  lastShadow = e;
 }
 
 // Lets player place ship
@@ -40,7 +42,8 @@ const playerPlaceShip = (board, ship) => {
     window.addEventListener('keydown', (e) => {
       if(e.key === 'x') {
         switchAxis();
-        squares.foreEach(el => el.classList.remove('hovered'));
+        squares.forEach(square => square.classList.remove('hovered'));
+        renderShadow(lastShadow, true, ship.length);
       }
     });
 }
