@@ -3,14 +3,16 @@ const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
+// Helper functions for UIPlayerPlace
+
 // Lets player place ship
-const UIPlayerPlace = (board, ship) => {
+const playerPlaceShip = (board, ship) => {
   const squares = document.querySelector('#p1 .board .square');
 
     squares.forEach(square => {
-      square.addEventListener('mouseover', (e) => renderShadow(e, shipLength));
-      square.addEventListener('mouseout', (e) => clearShadow(e, shipLength));
-      square.addEventListener('click', () => board.place(ship, x, y, axis));
+      square.addEventListener('mouseover', (e) => renderShadow(e, ship.length));
+      // square.addEventListener('mouseout', (e) => clearShadow(e, ship.length));
+      // square.addEventListener('click', () => board.place(ship, x, y, axis));
     });
 }
 // PROBLEM: User will place ships by selecting a ship and then clicking a 
@@ -31,7 +33,7 @@ const UIPlayerPlace = (board, ship) => {
 
 
 // Lets AI place ship
-const UIAIPlace = (board) => {
+const AIPlaceShip = (board) => {
 
 }
 
@@ -79,4 +81,4 @@ const UIAttack = (board) => {
   narrative.textContent = 'Click to fire on the enemy fleet';
 }
 
-export { p1Box, p2Box, UIPlayerPlace, UIAIPlace, renderBoard, UIAttack };
+export { p1Box, p2Box, playerPlaceShip, AIPlaceShip, renderBoard, UIAttack };

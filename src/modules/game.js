@@ -1,7 +1,7 @@
 import gameBoard from "./gameBoard";
 import player from "./player";
 import makeShip from './ship';
-import { p1Box, p2Box, UIPlayerPlace, UIAIPlace, renderBoard, UIAttack } from "./DOM";
+import { p1Box, p2Box, playerPlaceShip, AIPlaceShip, renderBoard, UIAttack } from "./DOM";
 
 
 // SETUP
