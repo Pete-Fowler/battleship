@@ -4,15 +4,21 @@ const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
 // Lets player place ship
-const UIPlayerPlace = (board) => {
+const UIPlayerPlace = (board, ship) => {
   const squares = document.querySelector('#p1 .board .square');
-  
+
+    squares.forEach(square => {
+      square.addEventListener('mouseover', (e) => renderShadow(e, shipLength));
+      square.addEventListener('mouseout', (e) => clearShadow(e, shipLength));
+      square.addEventListener('click', () => board.place(ship, x, y, axis));
+    });
 }
 // PROBLEM: User will place ships by selecting a ship and then clicking a 
 // coordinate on the board.
 // APPROACH: Input is the click from the user on a square. It will loop from big 
 // ships to ptb. Output is the gameBoard object is updated with the ship position, 
 // and does not allow board overflow. Pseudocode:
+
   // User is given a ship (big to small)
   // Narrative is updated with instructions and ship
   //   Instructions to right click, tab, or click button to switch axis are added.
