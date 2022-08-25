@@ -1,22 +1,8 @@
-import {
-  p1Board,
-  p2Board,
-  p1,
-  p2,
-  p1Ptb,
-  p1Sub,
-  p1Destroyer,
-  p1Battleship,
-  p1Carrier,
-  p2Ptb,
-  p2Sub,
-  p2Destroyer,
-  p2Battleship,
-  p2Carrier
-} from './game';
 
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
+let x;
+let y;
 
 const renderBoard = (board, box) => {
   // Outer board container
@@ -37,18 +23,29 @@ const renderBoard = (board, box) => {
   box.append(grid);
 }
 
-const userAttack = () => {
-  const squares = document.querySelectorAll('.square');
-  squares.forEach()
+// Player attack phase - sends x, y from clicked square to board.incoming()
+const attackCallback = (e) => {
+  x = e.target.dataset.x;
+  y = e.target.dataset.y;
+  const squares = document.querySelectorAll('#p2 .square');
+  squares.forEach(el => {
+    el.removeEventListener('click', attackCallback);
+    el.classList.remove('hoverable');
+  });
+}
+
+// Player attack phase - adds click event listener and hover effect 
+const UIAttack = () => {
+  const squares = document.querySelectorAll('#p2 .square');
+  squares.forEach(el => {
+    el.addEventListener('click', attackCallback);
+    el.classList.add('hoverable');
+  });
 }
 
 
-// We’ll leave the HTML implementation up to you for now, but you should display
-// both the player’s boards and render them using information from the Gameboard
-// class.
-
-// You need methods to render the gameboards and to take user input for attacking.
-// For attacks, let the user click on a coordinate in the enemy Gameboard.
+// You need a method to take user input for attacking. let the user click 
+// on a coordinate in the enemy Gameboard.
 
 
-export { renderBoard, p1Box, p2Box, };
+export { p1Box, p2Box, x, y, renderBoard, UIAttack };

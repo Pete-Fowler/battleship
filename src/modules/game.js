@@ -1,7 +1,7 @@
 import gameBoard from "./gameBoard";
 import player from "./player";
 import makeShip from './ship';
-import { renderBoard, p1Box, p2Box } from "./DOM";
+import { p1Box, p2Box, x, y, renderBoard, UIAttack } from "./DOM";
 
 // Make game boards
 const p1Board = gameBoard();
@@ -40,9 +40,12 @@ p2Board.place(p2Destroyer, 4, 2, 'y');
 p2Board.place(p2Battleship, 6, 6, 'y');
 p2Board.place(p2Carrier, 8, 4, 'y');
 
-
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
+
+UIAttack();
+p2Board.incoming(x, y);
+
 
 // The game loop should set up a new game by creating Players and Gameboards.
 // For now just populate each Gameboard with predetermined coordinates. You can
@@ -53,20 +56,3 @@ renderBoard(p2Board, p2Box);
 // function should belong to.
 // Create conditions so that the game ends once one players ships have all 
 // been sunk. This function is appropriate for the Game module.
-
-export { 
-  p1Board,
-  p2Board,
-  p1,
-  p2,
-  p1Ptb,
-  p1Sub,
-  p1Destroyer,
-  p1Battleship,
-  p1Carrier,
-  p2Ptb,
-  p2Sub,
-  p2Destroyer,
-  p2Battleship,
-  p2Carrier
-}
