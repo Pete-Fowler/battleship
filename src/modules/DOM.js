@@ -7,29 +7,28 @@ let axis = 'y';   // used to render shadow in playerPlaceShip
 
 
 // Helper functions for playerPlaceShip
-const renderShadow = (e, length) => {
+const renderShadow = (e, fill, length) => {
   let { x, y } = e.target.dataset;
   x = parseInt(x, 10);
   y = parseInt(y, 10);
   for(let i = 0; i < length; i += 1) {
     if(axis === 'x') {
-      document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`)
-      .classList.add('hovered'); 
+      const el = document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`);
+      fill === true ? el.classList.add('hovered') : el.classList.remove('hovered');
     } else {
-      document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`)
-      .classList.add('hovered'); 
+      const el = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`);
+      fill === true ? el.classList.add('hovered') : el.classList.remove('hovered');
     }
   }
 }
-// shade length along axis
 
 // Lets player place ship
 const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll('#p1 .board .square');
 
     squares.forEach(square => {
-      square.addEventListener('mouseover', (e) => renderShadow(e, ship.length));
-      // square.addEventListener('mouseout', (e) => clearShadow(e, ship.length));
+      square.addEventListener('mouseover', (e) => renderShadow(e, true, ship.length));
+      square.addEventListener('mouseout', (e) => renderShadow(e, false, ship.length));
       // square.addEventListener('click', () => board.place(ship, x, y, axis));
     });
 }
