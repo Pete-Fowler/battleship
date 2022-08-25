@@ -3,7 +3,7 @@ const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
-let axis = 'x';   // used to render shadow in playerPlaceShip
+let axis = 'y';   // used to render shadow in playerPlaceShip
 
 
 // Helper functions for playerPlaceShip
@@ -14,6 +14,9 @@ const renderShadow = (e, length) => {
   for(let i = 0; i < length; i += 1) {
     if(axis === 'x') {
       document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`)
+      .classList.add('hovered'); 
+    } else {
+      document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`)
       .classList.add('hovered'); 
     }
   }
