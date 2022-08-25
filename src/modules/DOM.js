@@ -47,9 +47,4 @@ const UIAttack = (board) => {
   narrative.textContent = 'Click to fire on the enemy fleet';
 }
 
-
-// You need a method to take user input for attacking. let the user click 
-// on a coordinate in the enemy Gameboard.
-
-
 export { p1Box, p2Box, renderBoard, UIAttack };

@@ -3,6 +3,9 @@ import player from "./player";
 import makeShip from './ship';
 import { p1Box, p2Box, renderBoard, UIAttack } from "./DOM";
 
+
+// SETUP
+
 // Make game boards
 const p1Board = gameBoard();
 p1Board.init();
@@ -27,7 +30,7 @@ const p2Destroyer = makeShip('destroyer');
 const p2Battleship = makeShip('battleship');
 const p2Carrier = makeShip('carrier');
 
-// Place ships ***************Will need editing for player control
+// Place ships *** will need editing for player control
 p1Board.place(p1Ptb, 2, 0, 'x');  
 p1Board.place(p1Sub, 7, 2, 'x');
 p1Board.place(p1Destroyer, 2, 4, 'x');
@@ -40,13 +43,18 @@ p2Board.place(p2Destroyer, 4, 2, 'y');
 p2Board.place(p2Battleship, 6, 6, 'y');
 p2Board.place(p2Carrier, 8, 4, 'y');
 
+// Render Board. Will need to do this before placing ships
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
+// MAIN GAME LOOP - will need loop
+
+// Player attack
 UIAttack(p2Board);
 
+// AI attack
 
-//  UI Attack adds the event listener and hoverable class. attackCallback() 
+// Gameover - after exit loop
 
 
 // The game loop should set up a new game by creating Players and Gameboards.
