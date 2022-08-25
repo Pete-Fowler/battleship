@@ -24,16 +24,14 @@ const renderBoard = (board, box) => {
 
 // Player attack phase - sends x, y from clicked square to board.incoming()
 const attackCallback = (e, board) => {
-  const x = e.target.dataset.x;
-  const y = e.target.dataset.y;
-  console.log(e.target);
+  const { x, y } = e.target.dataset;
   board.incoming(x, y);
   const squares = document.querySelectorAll('#p2 .square');
   squares.forEach(el => {
     el.removeEventListener('click', attackCallback);
     el.classList.remove('hoverable');
   });
-  console.log(board.getMap(x, y));}
+}
 
 // Player attack phase - adds click event listener and hover effect 
 const UIAttack = (board) => {
