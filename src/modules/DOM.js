@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
@@ -5,8 +6,11 @@ const narrative = document.querySelector('#narrative');
 
 let axis = 'y';   // used to render shadow in playerPlaceShip
 
-
 // Helper functions for playerPlaceShip
+const switchAxis = () => {
+  axis === 'x' ? axis = 'y' : axis = 'x';
+}
+
 const renderShadow = (e, fill, length) => {
   let { x, y } = e.target.dataset;
   x = parseInt(x, 10);
@@ -25,11 +29,19 @@ const renderShadow = (e, fill, length) => {
 // Lets player place ship
 const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll('#p1 .board .square');
-
+  narrative.textContent = `Lead your ${ship.type} into battle. Press X to steer.`;
+  
     squares.forEach(square => {
       square.addEventListener('mouseover', (e) => renderShadow(e, true, ship.length));
       square.addEventListener('mouseout', (e) => renderShadow(e, false, ship.length));
       // square.addEventListener('click', () => board.place(ship, x, y, axis));
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'x') {
+        switchAxis();
+        squares.foreEach(el => el.classList.remove('hovered'));
+      }
     });
 }
 // PROBLEM: User will place ships by selecting a ship and then clicking a 
