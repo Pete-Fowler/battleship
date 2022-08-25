@@ -19,10 +19,16 @@ const renderShadow = (e, fill, length) => {
   for(let i = 0; i < length; i += 1) {
     if(axis === 'x') {
       const el = document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`);
-      fill === true ? el.classList.add('hovered') : el.classList.remove('hovered');
+      fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
+      if(fill === 'place') {
+        el.classList.add('placed');
+      }
     } else {
       const el = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`);
-      fill === true ? el.classList.add('hovered') : el.classList.remove('hovered');
+      fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
+      if(fill === 'place') {
+        el.classList.add('placed');
+      }
     }
   }
   lastCoords = e;
@@ -33,6 +39,7 @@ const clickToPlace = (e, board, ship) => {
   x = parseInt(x, 10);
   y = parseInt(y, 10)
   board.place(ship, x, y, axis);
+  renderShadow(e, 'place', ship.length);
   console.log(board.getMap());
 }
 
@@ -42,8 +49,8 @@ const playerPlaceShip = (board, ship) => {
   narrative.textContent = `Lead your ${ship.type} into battle. Press X to steer.`;
   
     squares.forEach(square => {
-      square.addEventListener('mouseover', (e) => renderShadow(e, true, ship.length));
-      square.addEventListener('mouseout', (e) => renderShadow(e, false, ship.length));
+      square.addEventListener('mouseover', (e) => renderShadow(e, 'fill', ship.length));
+      square.addEventListener('mouseout', (e) => renderShadow(e, 'clear', ship.length));
       square.addEventListener('click', (e) => clickToPlace(e, board, ship));
     });
 
@@ -51,7 +58,7 @@ const playerPlaceShip = (board, ship) => {
       if(e.key === 'x') {
         switchAxis();
         squares.forEach(square => square.classList.remove('hovered'));
-        renderShadow(lastCoords, true, ship.length);
+        renderShadow(lastCoords, 'fill', ship.length);
       }
     });
 }
