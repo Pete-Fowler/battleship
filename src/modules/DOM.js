@@ -1,6 +1,7 @@
 
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
+const narrative = document.querySelector('#narrative');
 let x;
 let y;
 
@@ -32,6 +33,7 @@ const attackCallback = (e) => {
     el.removeEventListener('click', attackCallback);
     el.classList.remove('hoverable');
   });
+  console.log(x, y);
 }
 
 // Player attack phase - adds click event listener and hover effect 
@@ -41,6 +43,7 @@ const UIAttack = () => {
     el.addEventListener('click', attackCallback);
     el.classList.add('hoverable');
   });
+  narrative.textContent = 'Click to fire on the enemy fleet';
 }
 
 

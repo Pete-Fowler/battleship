@@ -44,7 +44,8 @@ renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
 UIAttack();
-p2Board.incoming(x, y);
+p2Board.incoming(x, y);               // This is causing an error
+console.log(p2Board.getMap(x, y));
 
 
 // The game loop should set up a new game by creating Players and Gameboards.

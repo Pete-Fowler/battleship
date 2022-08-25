@@ -70,7 +70,8 @@ body {
   box-shadow: 2px 2px 2px black;
 }
 
-.hoverable {
+.hoverable:hover {
   background-color: darkgray;
+  transition: .4s;
 }
 
