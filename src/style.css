@@ -71,12 +71,12 @@ body {
 }
 
 .hovered {
-  background-color: darkgray;
+  background-color: #848484;
   transition: .4s;
 }
 
 .hoverable:hover {
-  background-color: darkgray;
+  background-color: #848484;
   transition: .4s;
 }
 
