@@ -34,12 +34,20 @@ const renderShadow = (e, fill, length) => {
   lastCoords = e;
 }
 
+const removeListeners = () => {
+  const squares = document.querySelectorAll('#p1 .board .square');
+  squares.forEach(square => {
+    square.replaceWith(square.cloneNode());
+  });
+}
+
 const clickToPlace = (e, board, ship) => {
   let { x, y } = e.target.dataset;
   x = parseInt(x, 10);
   y = parseInt(y, 10)
   board.place(ship, x, y, axis);
   renderShadow(e, 'place', ship.length);
+  removeListeners();
   console.log(board.getMap());
 }
 
