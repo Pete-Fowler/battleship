@@ -100,7 +100,6 @@ const renderBoard = (board, box) => {
       square.className = 'square';
       square.dataset.x = i;
       square.dataset.y = j;
-      square.textContent = board.getMap()[i][j];
       grid.append(square);
     }
   }

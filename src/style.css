@@ -5,6 +5,9 @@
 }
 
 body {
+  background-image: url('./images/background.jpg');
+  background-size: cover;
+  background-position: center;
   display: grid;
   grid: 
     'header' 75px
@@ -65,7 +68,8 @@ body {
 .square {
   width: 2.5vw;
   height: 2.5vw;
-  background-color: lightgray;
+  background-color: rgb(0, 157, 255);
+  opacity: .9;
   border-radius: 5px;
   box-shadow: 2px 2px 2px black;
 }
