@@ -73,7 +73,12 @@ describe('game board', () => {
     expect(board.gameOver()).toEqual(true);
   })
   test('Collision check - tests for wall collision', () => {
-    expect(board.checkCollision(carrier, 7, 0)).toEqual(true);      
+    const carrier = makeShip('carrier');
+    console.log(carrier.length, carrier.getHull());
+    expect(board.checkCollision(carrier, 5, 0, 'x')).toEqual(false);      
+    expect(board.checkCollision(carrier, 6, 0, 'x')).toEqual(true);    
+    expect(board.checkCollision(carrier, 9, 5, 'y')).toEqual(false);    
+    expect(board.checkCollision(carrier, 9, 6, 'y')).toEqual(true);    
   });
   test('Collision check - tests for ship overlap', () => {
 

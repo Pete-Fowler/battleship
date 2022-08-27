@@ -11,15 +11,15 @@ const gameBoard = () => {
     }
   };
   const getMap = () => map;
-  const checkCollision = (ship, x, y) => {
-    if(x + ship.length > 9 || y + ship.length > 9) {
+  const checkCollision = (ship, x, y, axis) => {
+    if(axis === 'x' && x + ship.length > 10) {
+      return true;
+    }
+    if(axis === 'y' && y + ship.length > 10) {
       return true;
     }
     return false;
   }
-  //  get all coords of where ship will land
-  // if any values > 9, return true, else return false
-
   const place = (ship, x, y, axis) => {
     // i is hull index to track hits
     let i = 0;
