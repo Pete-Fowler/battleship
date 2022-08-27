@@ -20,15 +20,13 @@ const renderShadow = (e, fill, length) => {
     if(axis === 'x') {
       const el = document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`);
       fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
-      if(fill === 'place') {
-        el.classList.add('placed');
-      }
+      fill === 'place' && el.classList.add('placed');
+      
     } else {
       const el = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`);
       fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
-      if(fill === 'place') {
-        el.classList.add('placed');
-      }
+      fill === 'place' && el.classList.add('placed');
+      
     }
   }
   lastCoords = e;
@@ -44,6 +42,10 @@ const removeListeners = () => {
 
 const clickToPlace = (e, board, ship) => {
   let { x, y } = e.target.dataset;
+  console.log(board.checkCollision(ship, x, y, axis));
+  // if(board.checkCollision(ship, x, y, axis)) {
+  //   return;
+  // }
   x = parseInt(x, 10);
   y = parseInt(y, 10)
   board.place(ship, x, y, axis);
