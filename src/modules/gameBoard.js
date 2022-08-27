@@ -12,11 +12,38 @@ const gameBoard = () => {
   };
   const getMap = () => map;
   const checkCollision = (ship, x, y, axis) => {
-    if(axis === 'x' && x + ship.length > 10) {
-      return true;
+    const coords = [];
+    if(axis === 'x') {
+      if(x + ship.length > 10) {
+        return true;
+      }
+      for(let i = 0; i < ship.length; i += 1) {
+        coords.push([x + i, y]);
+      }
+      let returnValue = false;
+      coords.forEach(pair => {
+        const [ a, b ] = pair;
+        if(typeof map[a][b] === 'object') {
+          returnValue = true;
+        }
+      });
+      return returnValue;
     }
-    if(axis === 'y' && y + ship.length > 10) {
-      return true;
+    if(axis === 'y') {
+      if(y + ship.length > 10) {
+        return true;
+      }
+      for(let i = 0; i < ship.length; i += 1) {
+        coords.push([x, y + i]);
+      }
+      let returnValue = false;
+      coords.forEach(pair => {
+        const [ a, b ] = pair;
+        if(typeof map[a][b] === 'object') {
+          returnValue = true;
+        }
+      });
+      return returnValue;
     }
     return false;
   }
@@ -53,7 +80,7 @@ const gameBoard = () => {
     let ship;
     let hullIndex;
     if (typeof map[x][y] === "object") {
-      [ship, hullIndex] = map[x][y]; // 0 is ship object, 1 is hull index. see place()
+      [ ship, hullIndex ] = map[x][y]; // 0 is ship object, 1 is hull index. see place()
       ship.hit(hullIndex);
       lastShotHit = true;
       testIfSunk(ship);

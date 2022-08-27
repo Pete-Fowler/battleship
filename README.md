@@ -7,3 +7,5 @@ The contents of the first fill is only evaluating once - creating the second arr
 
 Cannot compare 2 arrays??? Used JSON.stringify() on arrays in the AI adjacent shot function.
 
+return inside forEach does not return from overall function, only from lambda inside foreach, skipping one item. https://stackoverflow.com/questions/68322439/returnforeach-does-not-seem-to-exit-foreach
+
