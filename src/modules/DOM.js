@@ -42,16 +42,11 @@ const removeListeners = () => {
 
 const clickToPlace = (e, board, ship) => {
   let { x, y } = e.target.dataset;
-  console.log(board.checkCollision(ship, x, y, axis));
-  // if(board.checkCollision(ship, x, y, axis)) {
-  //   return;
-  // }
   x = parseInt(x, 10);
   y = parseInt(y, 10)
   board.place(ship, x, y, axis);
   renderShadow(e, 'place', ship.length);
   removeListeners();
-  console.log(board.getMap());
 }
 
 // Main function for player to place ship
