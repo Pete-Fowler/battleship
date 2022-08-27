@@ -39,6 +39,7 @@ const removeListeners = () => {
   squares.forEach(square => {
     square.replaceWith(square.cloneNode());
   });
+  window.removeEventListener('keydown', () => { });
 }
 
 const clickToPlace = (e, board, ship) => {

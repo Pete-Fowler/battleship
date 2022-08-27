@@ -72,6 +72,13 @@ describe('game board', () => {
     board.incoming(1, 4);
     expect(board.gameOver()).toEqual(true);
   })
+  test('Collision check - tests for wall collision', () => {
+    const carrier = makeShip('carrier');
+    expect(board.checkCollision(carrrier, 7, 0, 'x')).toEqual(true);       
+  });
+  test('Collision check - tests for ship overlap', () => {
+
+  });
 });
 
 // ships are carrier 5 / battleship 4 / destroyer 3 / sub 3 / ptb 2
