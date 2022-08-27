@@ -14,20 +14,18 @@ const switchAxis = () => {
 
 const renderShadow = (e, fill, length) => {
   let { x, y } = e.target.dataset;
+  let el;
   x = parseInt(x, 10);
   y = parseInt(y, 10);
   for(let i = 0; i < length; i += 1) {
     if(axis === 'x') {
-      const el = document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`);
-      fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
-      fill === 'place' && el.classList.add('placed');
-      
+      el = document.querySelector(`#p1 .square[data-x="${x + i}"][data-y="${y}"]`);      
     } else {
-      const el = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`);
-      fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
-      fill === 'place' && el.classList.add('placed');
-      
+      el = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y + i}"]`);
     }
+    fill === 'fill' ? el.classList.add('hovered') : el.classList.remove('hovered');
+    fill === 'place' && el.classList.add('placed');
+    fill === 'red' && el.classList.add('red');
   }
   lastCoords = e;
 }
@@ -42,11 +40,16 @@ const removeListeners = () => {
 
 const clickToPlace = (e, board, ship) => {
   let { x, y } = e.target.dataset;
+  // BUG - checkCollision() passes tests, but is always returning true here...
+  // if(board.checkCollision(ship, x, y, axis)) {
+  //   return;
+  // }
   x = parseInt(x, 10);
   y = parseInt(y, 10)
   board.place(ship, x, y, axis);
   renderShadow(e, 'place', ship.length);
   removeListeners();
+  console.log(board.getMap());
 }
 
 // Main function for player to place ship
