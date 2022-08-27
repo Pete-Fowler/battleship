@@ -34,13 +34,6 @@ const p2Carrier = makeShip('carrier');
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
-// Player place ships *** will need editing for player control
-p1Board.place(p1Ptb, 2, 0, 'x');  
-p1Board.place(p1Sub, 7, 2, 'x');
-p1Board.place(p1Destroyer, 2, 4, 'x');
-p1Board.place(p1Battleship, 6, 6, 'x');
-// p1Board.place(p1Carrier, 4, 8, 'x');
-
 // AI place ships
 p2Board.place(p2Ptb, 0, 1, 'y');
 p2Board.place(p2Sub, 2, 6, 'y');
@@ -51,11 +44,14 @@ p2Board.place(p2Carrier, 8, 4, 'y');
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
+// Player places ships
+playerPlaceShip(p1Board, p1Carrier);
+
 // MAIN GAME LOOP - will need loop
 
 // Player attack
 // UIAttack(p2Board);
-playerPlaceShip(p1Board, p1Carrier);
+
 
 // AI attack
 
