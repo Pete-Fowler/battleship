@@ -81,8 +81,11 @@ describe('game board', () => {
     expect(board.checkCollision(carrier, 9, 6, 'y')).toEqual(true);    
   });
   test('Collision check - tests for ship overlap', () => {
-
+    const carrier = makeShip('carrier');
+    const battleship = makeShip('battleship');
+    board.place(battleship, 0, 5, 'x');
+    expect(board.checkCollision(carrier, 0, 0, 'y')).toEqual(false);
+    expect(board.checkCollision(carrier, 3, 1, 'y')).toEqual(true);
+    expect(board.checkCollision(carrier, 4, 2, 'y')).toEqual(false);
   });
 });
-
-// ships are carrier 5 / battleship 4 / destroyer 3 / sub 3 / ptb 2
