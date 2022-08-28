@@ -30,7 +30,7 @@ const p1Sub = makeShip('sub');
 const p1Destroyer = makeShip('destroyer');
 const p1Battleship = makeShip('battleship');
 const p1Carrier = makeShip('carrier');
-const p1Ships = [p1Ptb, p1Sub, p1Destroyer, p1Battleship, p1Carrier];
+const p1Ships = [p1Carrier, p1Battleship, p1Destroyer, p1Sub, p1Ptb];
 
 // Make AI ships
 const p2Ptb = makeShip('patrolBoat');

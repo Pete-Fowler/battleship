@@ -1,11 +1,16 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-expressions */
 
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
-let axis = 'y';   // used to render shadow in playerPlaceShip
-let lastCoords;
+let axis = 'y';   // Used to render shadow in playerPlaceShip
+let lastCoords; 
+
+let i = 0;  // Number of placed ships for playerPlacedShipPhase
+let p1Board;
+let p1Ships;
 
 // Helper functions for playerPlaceShip
 const switchAxis = () => {
@@ -58,7 +63,8 @@ const clickToPlace = (e, board, ship) => {
   board.place(ship, x, y, axis);
   renderShadow(e, 'place', board, ship);
   removeListeners();
-  console.log(board.getMap());
+  playerPlaceShipPhase(p1Board, p1Ships);
+  // console.log(board.getMap());
 }
 
 // Main function for player to place ship
@@ -84,11 +90,15 @@ const playerPlaceShip = (board, ship) => {
     });
 }
 
-const playerPlaceShipPhase = (board, ships) => {
-  let i = 0;  // number of placed ships
-
+function playerPlaceShipPhase (board, ships) {
+  if(i === 0) {
+    p1Board = board;
+    p1Ships = ships;
+  }
+  if(i <= 4) {
   playerPlaceShip(board, ships[i]);
-  // 
+  i += 1;
+  }
 }
 // Will take a board and ship object
 // It will use a counter and will call playerPlaceShip on each of the ships, 
