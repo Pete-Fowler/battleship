@@ -56,7 +56,7 @@ const clickToPlace = (e, board, ship) => {
     return;
   }
   board.place(ship, x, y, axis);
-  renderShadow(e, 'place', ship.length);
+  renderShadow(e, 'place', board, ship);
   removeListeners();
   console.log(board.getMap());
 }
