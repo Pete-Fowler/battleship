@@ -1,7 +1,15 @@
 import gameBoard from "./gameBoard";
 import player from "./player";
 import makeShip from './ship';
-import { p1Box, p2Box, playerPlaceShip, AIPlaceShip, renderBoard, UIAttack } from "./DOM";
+import { 
+  p1Box, 
+  p2Box, 
+  playerPlaceShip, 
+  playerPlaceShipPhase, 
+  AIPlaceShip,
+   renderBoard, 
+   UIAttack 
+} from "./DOM";
 
 
 // SETUP
@@ -46,7 +54,7 @@ renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
 // Player places ships
-playerPlaceShip(p1Board, p1Carrier);
+playerPlaceShipPhase(p1Board, p1Ships);
 
 // MAIN GAME LOOP - will need loop
 

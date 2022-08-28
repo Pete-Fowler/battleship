@@ -84,6 +84,16 @@ const playerPlaceShip = (board, ship) => {
     });
 }
 
+const playerPlaceShipPhase = (board, ships) => {
+  let i = 0;  // number of placed ships
+
+  playerPlaceShip(board, ships[i]);
+  // 
+}
+// Will take a board and ship object
+// It will use a counter and will call playerPlaceShip on each of the ships, 
+// but only once the click from the previous one is done
+
 // Lets AI place ship
 const AIPlaceShip = (board) => {
 
@@ -133,4 +143,4 @@ const UIAttack = (board) => {
   narrative.textContent = 'Click to fire on the enemy fleet';
 }
 
-export { p1Box, p2Box, playerPlaceShip, AIPlaceShip, renderBoard, UIAttack };
+export { p1Box, p2Box, playerPlaceShip, playerPlaceShipPhase, AIPlaceShip, renderBoard, UIAttack };
