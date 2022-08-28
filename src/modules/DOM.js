@@ -15,7 +15,7 @@ const switchAxis = () => {
 const renderShadow = (e, fill, board, ship) => {
   let { x, y } = e.target.dataset;
   let el;
-  let collision;
+  let collision = false;
   x = parseInt(x, 10);
   y = parseInt(y, 10);
   if(board.checkCollision(ship, x, y, axis) && fill !== 'clear') {
@@ -34,7 +34,7 @@ const renderShadow = (e, fill, board, ship) => {
         el.classList.remove('red');
       }
       fill === 'place' && el.classList.add('placed');
-      collision && el.classList.add('red');
+      if(collision === true && fill !== 'place') {el.classList.add('red')};
     }
   }
   lastCoords = e;
