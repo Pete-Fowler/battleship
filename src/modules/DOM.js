@@ -75,7 +75,10 @@ const playerPlaceShip = (board, ship) => {
     window.addEventListener('keydown', (e) => {
       if(e.key === 'x') {
         switchAxis();
-        squares.forEach(square => square.classList.remove('hovered'));
+        squares.forEach(square => {
+          square.classList.remove('hovered');
+          square.classList.remove('red');
+        });
         renderShadow(lastCoords, 'fill', board, ship);
       }
     });
