@@ -3,12 +3,11 @@ import player from "./player";
 import makeShip from './ship';
 import { 
   p1Box, 
-  p2Box, 
-  playerPlaceShip, 
+  p2Box,  
   playerPlaceShipPhase, 
-  AIPlaceShip,
-   renderBoard, 
-   UIAttack 
+  AIPlaceShipPhase,
+  renderBoard, 
+  UIAttack,
 } from "./DOM";
 
 
@@ -38,22 +37,21 @@ const p2Sub = makeShip('sub');
 const p2Destroyer = makeShip('destroyer');
 const p2Battleship = makeShip('battleship');
 const p2Carrier = makeShip('carrier');
-
-// Render Board
-renderBoard(p1Board, p1Box);
-renderBoard(p2Board, p2Box);
+const AIShips = [p2Carrier, p2Battleship, p2Destroyer, p2Sub, p2Ptb];
 
 // AI place ships
-p2Board.place(p2Ptb, 0, 1, 'y');
-p2Board.place(p2Sub, 2, 6, 'y');
-p2Board.place(p2Destroyer, 4, 2, 'y');
-p2Board.place(p2Battleship, 6, 6, 'y');
-p2Board.place(p2Carrier, 8, 4, 'y');
+// p2Board.place(p2Ptb, 0, 1, 'y');
+// p2Board.place(p2Sub, 2, 6, 'y');
+// p2Board.place(p2Destroyer, 4, 2, 'y');
+// p2Board.place(p2Battleship, 6, 6, 'y');
+// p2Board.place(p2Carrier, 8, 4, 'y');
 
+// Render Boards
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
 
-// Player places ships
+// Place ships phase
+AIPlaceShipPhase(p2Board, AIShips, p2);
 playerPlaceShipPhase(p1Board, p1Ships);
 
 // MAIN GAME LOOP - will need loop
