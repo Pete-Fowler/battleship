@@ -76,25 +76,21 @@ const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll('#p1 .board .square');
   narrative.textContent = `Lead your ${ship.type} into battle. Press X to steer.`;
   
-    squares.forEach(square => {
-      square.addEventListener('mouseover', (e) => renderShadow(e, 'fill', board, ship));
-      square.addEventListener('mouseout', (e) => renderShadow(e, 'clear', board, ship));
-      square.addEventListener('click', (e) => clickToPlace(e, board, ship));
-    });
+  squares.forEach(square => {
+    square.addEventListener('mouseover', (e) => renderShadow(e, 'fill', board, ship));
+    square.addEventListener('mouseout', (e) => renderShadow(e, 'clear', board, ship));
+    square.addEventListener('click', (e) => clickToPlace(e, board, ship));
+  });
 
-    if(i === 0) {
-      window.addEventListener('keydown', (e) => {
-        if(e.key === 'x') {
-          renderShadow(lastCoordsRendered, 'clear', board, lastShip);
-          // squares.forEach(square => {
-          //   square.classList.remove('hovered');
-          //   square.classList.remove('red');
-          
-          switchAxis();
-          renderShadow(lastCoordsRendered, 'fill', board, lastShip);
-        }
-      });
-    }
+  if(i === 0) {
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'x') {
+        renderShadow(lastCoordsRendered, 'clear', board, lastShip);
+        switchAxis();
+        renderShadow(lastCoordsRendered, 'fill', board, lastShip);
+      }
+    });
+  }
 }
 
 function playerPlaceShipPhase (board, ships) {
@@ -108,9 +104,6 @@ function playerPlaceShipPhase (board, ships) {
   i += 1;
   }
 }
-// Will take a board and ship object
-// It will use a counter and will call playerPlaceShip on each of the ships, 
-// but only once the click from the previous one is done
 
 // Lets AI place ship
 const AIPlaceShip = (board) => {
