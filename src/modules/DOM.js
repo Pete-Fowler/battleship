@@ -106,19 +106,14 @@ function playerPlaceShipPhase (board, ships) {
   }
 }
 
-// AI Place ship functions
-const AIPlaceShip = (board, ships, player) => {
+// AI Place ship phase
+const AIPlaceShipPhase = (board, ships, player) => {
   player.AIPlaceShip(board, ships[j]);
   j += 1;
-  AIPlaceShipPhase(board, ships, player);
-  console.log(board.getMap());
-}
-
-const AIPlaceShipPhase = (board, ships, player) => {
   if(j === 5) {
     return;
   }
-  AIPlaceShip(board, ships, player);
+  AIPlaceShipPhase(board, ships, player);
 }
 
 const renderBoard = (board, box) => {
