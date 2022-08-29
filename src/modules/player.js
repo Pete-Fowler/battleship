@@ -16,6 +16,24 @@ const player = (moniker, board, typeOfPlayer) => {
     AImap[i] = Array(10).fill(0);
   }
   const getMap = () => AImap;
+  const AIPlaceShip = (AIBoard, ship) => {
+    let x;
+    let y;
+    let axis;
+    do {
+      axis = Math.floor(Math.random() * 2);
+      if(axis === 0) {
+        axis = 'x';
+      } else {
+        axis = 'y';
+      }
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+    } while(AIBoard.checkCollision(ship, x, y, axis))
+    AIBoard.place(ship, x, y, axis);
+  }
+
+  // 2 helper functions for AI attack
   const pickCoordinates = () => {
     do {
       a = Math.floor(Math.random() * 10);
@@ -25,7 +43,7 @@ const player = (moniker, board, typeOfPlayer) => {
     lastShot = [a, b];
   };
   const pickAdjacentCoordinates = () => {
-    let [ i, j ] = lastShot;    
+    const [ i, j ] = lastShot;    
     let adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
 
     // Code to limit possible shots for edge of board   
@@ -98,6 +116,7 @@ const player = (moniker, board, typeOfPlayer) => {
     attack,
     getAIcoordinates,
     getMap,
+    AIPlaceShip,
     getLastShot,
   };
 };

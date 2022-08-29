@@ -68,7 +68,6 @@ const clickToPlace = (e, board, ship) => {
   renderShadow(e, 'place', board, ship);
   removeListeners();
   playerPlaceShipPhase(p1Board, p1Ships);
-  // console.log(board.getMap());
 }
 
 // Main function for player to place ship
