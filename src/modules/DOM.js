@@ -10,10 +10,13 @@ let axis = 'y';
 let lastCoordsRendered; 
 let lastShip;
 
-// Number of placed ships for playerPlaceShipPhase
+// Used for playerPlaceShipPhase
 let i = 0;  
 let p1Board;
 let p1Ships;
+
+// Used to tell game.js when playerPlaceShipPhase is over
+const shipsPlaced = new Event('shipsPlaced');
 
 // For AIPlaceShipPhase
 let j = 0;
@@ -70,6 +73,10 @@ const clickToPlace = (e, board, ship) => {
   board.place(ship, x, y, axis);
   renderShadow(e, 'place', board, ship);
   removeListeners();
+  if(i === 5) {
+    document.dispatchEvent(shipsPlaced);
+    console.log('fired');
+  }
   playerPlaceShipPhase(p1Board, p1Ships);
 }
 

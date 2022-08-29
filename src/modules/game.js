@@ -57,10 +57,13 @@ playerPlaceShipPhase(p1Board, p1Ships);
 // MAIN GAME LOOP - will need loop
 
 // Player attack
+
+// ################################
+// Right now UIAttack is immediately going before player places ships
+// ################################
+
+document.addEventListener('shipsPlaced', () => UIAttack(p2Board));
 // UIAttack(p2Board);
-
-
-// AI attack
 
 // Gameover - after exit loop
 
