@@ -21,11 +21,11 @@ const p2Board = gameBoard();
 p2Board.init();
 
 // Make players
-const p1 = player('Gustav', p1Board, "human");
-const p2 = player("Terminator",p2Board, "AI");
+const p1 = player('1', p1Board, "human");
+const p2 = player("2",p2Board, "AI");
 
 // Make p1 ships
-const p1Ptb = makeShip('patrolBoat');
+const p1Ptb = makeShip('patrol boat');
 const p1Sub = makeShip('sub');
 const p1Destroyer = makeShip('destroyer');
 const p1Battleship = makeShip('battleship');
@@ -33,7 +33,7 @@ const p1Carrier = makeShip('carrier');
 const p1Ships = [p1Carrier, p1Battleship, p1Destroyer, p1Sub, p1Ptb];
 
 // Make AI ships
-const p2Ptb = makeShip('patrolBoat');
+const p2Ptb = makeShip('patrol boat');
 const p2Sub = makeShip('sub');
 const p2Destroyer = makeShip('destroyer');
 const p2Battleship = makeShip('battleship');
