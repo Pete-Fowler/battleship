@@ -32,7 +32,7 @@ describe('game board', () => {
     expect(board.getMap()).toEqual(boardTemplate);
   });
   test('Incoming, hull damage, sunk ship tracking, miss tracking', () => {
-    const patrol = makeShip('patrolBoat');
+    const patrol = makeShip('patrol boat');
     board.place(patrol, 4, 4, 'x');
     board.incoming(5, 4);
     board.incoming(4, 4);
@@ -43,7 +43,7 @@ describe('game board', () => {
     expect(board.getMap()[3][4]).toEqual(1);
   });
   test('gameOver() detects game end', () => {
-    const patrol = makeShip('patrolBoat');
+    const patrol = makeShip('patrol boat');
     const sub = makeShip('sub');
     const destroyer = makeShip('destroyer');
     const battleship = makeShip('battleship');

@@ -1,13 +1,21 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-expressions */
 
 const p1Box = document.querySelector('#p1');
 const p2Box = document.querySelector('#p2');
 const narrative = document.querySelector('#narrative');
 
-let axis = 'y';   // used to render shadow in playerPlaceShip
-let lastCoords;
+// Used in switchAxis and renderShadow and playerPlaceShip
+let axis = 'y';   
+let lastCoordsRendered; 
+let lastShip;
 
-// Helper functions for playerPlaceShip
+// Number of placed ships for playerPlacedShipPhase
+let i = 0;  
+let p1Board;
+let p1Ships;
+
+// Helper functions for playerPlaceShipPhase
 const switchAxis = () => {
   axis === 'x' ? axis = 'y' : axis = 'x';
 }
@@ -37,7 +45,8 @@ const renderShadow = (e, fill, board, ship) => {
       if(collision === true && fill !== 'place') {el.classList.add('red')};
     }
   }
-  lastCoords = e;
+  lastCoordsRendered = e;
+  lastShip = ship;
 }
 
 const removeListeners = () => {
@@ -45,7 +54,7 @@ const removeListeners = () => {
   squares.forEach(square => {
     square.replaceWith(square.cloneNode());
   });
-  window.removeEventListener('keydown', () => { });
+  window.removeEventListener('keydown', (e) => {});
 }
 
 const clickToPlace = (e, board, ship) => {
@@ -58,7 +67,8 @@ const clickToPlace = (e, board, ship) => {
   board.place(ship, x, y, axis);
   renderShadow(e, 'place', board, ship);
   removeListeners();
-  console.log(board.getMap());
+  playerPlaceShipPhase(p1Board, p1Ships);
+  // console.log(board.getMap());
 }
 
 // Main function for player to place ship
@@ -72,17 +82,35 @@ const playerPlaceShip = (board, ship) => {
       square.addEventListener('click', (e) => clickToPlace(e, board, ship));
     });
 
-    window.addEventListener('keydown', (e) => {
-      if(e.key === 'x') {
-        switchAxis();
-        squares.forEach(square => {
-          square.classList.remove('hovered');
-          square.classList.remove('red');
-        });
-        renderShadow(lastCoords, 'fill', board, ship);
-      }
-    });
+    if(i === 0) {
+      window.addEventListener('keydown', (e) => {
+        if(e.key === 'x') {
+          renderShadow(lastCoordsRendered, 'clear', board, lastShip);
+          // squares.forEach(square => {
+          //   square.classList.remove('hovered');
+          //   square.classList.remove('red');
+          
+          switchAxis();
+          renderShadow(lastCoordsRendered, 'fill', board, lastShip);
+        }
+      });
+    }
 }
+
+function playerPlaceShipPhase (board, ships) {
+  if(i === 0) {
+    p1Board = board;
+    p1Ships = ships;
+    
+  }
+  if(i <= 4) {
+  playerPlaceShip(board, ships[i]);
+  i += 1;
+  }
+}
+// Will take a board and ship object
+// It will use a counter and will call playerPlaceShip on each of the ships, 
+// but only once the click from the previous one is done
 
 // Lets AI place ship
 const AIPlaceShip = (board) => {
@@ -133,4 +161,4 @@ const UIAttack = (board) => {
   narrative.textContent = 'Click to fire on the enemy fleet';
 }
 
-export { p1Box, p2Box, playerPlaceShip, AIPlaceShip, renderBoard, UIAttack };
+export { p1Box, p2Box, playerPlaceShip, playerPlaceShipPhase, AIPlaceShip, renderBoard, UIAttack };

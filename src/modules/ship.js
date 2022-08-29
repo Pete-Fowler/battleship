@@ -9,7 +9,7 @@ const makeShip = (type) => {
   if (type === "sub" || type === "destroyer") {
     length = 3;
   }
-  if (type === "patrolBoat") {
+  if (type === "patrol boat") {
     length = 2;
   }
   const hull = Array(length).fill(0);
