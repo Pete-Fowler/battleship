@@ -10,10 +10,13 @@ let axis = 'y';
 let lastCoordsRendered; 
 let lastShip;
 
-// Number of placed ships for playerPlacedShipPhase
+// Number of placed ships for playerPlaceShipPhase
 let i = 0;  
 let p1Board;
 let p1Ships;
+
+// For AIPlaceShipPhase
+let j = 0;
 
 // Helper functions for playerPlaceShipPhase
 const switchAxis = () => {
@@ -70,7 +73,6 @@ const clickToPlace = (e, board, ship) => {
   playerPlaceShipPhase(p1Board, p1Ships);
 }
 
-// Main function for player to place ship
 const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll('#p1 .board .square');
   narrative.textContent = `Lead your ${ship.type} into battle. Press X to steer.`;
@@ -104,9 +106,19 @@ function playerPlaceShipPhase (board, ships) {
   }
 }
 
-// Lets AI place ship
-const AIPlaceShip = (board) => {
+// AI Place ship functions
+const AIPlaceShip = (board, ships, player) => {
+  player.AIPlaceShip(board, ships[j]);
+  j += 1;
+  AIPlaceShipPhase(board, ships, player);
+  console.log(board.getMap());
+}
 
+const AIPlaceShipPhase = (board, ships, player) => {
+  if(j === 5) {
+    return;
+  }
+  AIPlaceShip(board, ships, player);
 }
 
 const renderBoard = (board, box) => {
@@ -153,4 +165,4 @@ const UIAttack = (board) => {
   narrative.textContent = 'Click to fire on the enemy fleet';
 }
 
-export { p1Box, p2Box, playerPlaceShip, playerPlaceShipPhase, AIPlaceShip, renderBoard, UIAttack };
+export { p1Box, p2Box, playerPlaceShip, playerPlaceShipPhase, AIPlaceShipPhase, renderBoard, UIAttack };
