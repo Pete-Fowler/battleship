@@ -178,9 +178,8 @@ const playerAttack = (board) => {
   narrative.textContent = "Click to fire on the enemy fleet";
 };
 
-function attackPhase(playerTwo, playerOneBoard, playerTwoBoard) {
+function attackPhase(playerTwo, playerTwoBoard) {
   p2 = playerTwo;
-  p1Board = playerOneBoard;
   p2Board = playerTwoBoard;
 }
 
