@@ -12,7 +12,6 @@ let lastShip;
 
 // Used for playerPlaceShipPhase and attackPhase
 let i = 0;
-let p1;
 let p2;
 let p1Board;
 let p2Board;
@@ -179,8 +178,7 @@ const playerAttack = (board) => {
   narrative.textContent = "Click to fire on the enemy fleet";
 };
 
-function attackPhase(playerOne, playerTwo, playerOneBoard, playerTwoBoard) {
-  p1 = playerOne;
+function attackPhase(playerTwo, playerOneBoard, playerTwoBoard) {
   p2 = playerTwo;
   p1Board = playerOneBoard;
   p2Board = playerTwoBoard;
