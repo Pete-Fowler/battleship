@@ -39,13 +39,6 @@ const p2Battleship = makeShip('battleship');
 const p2Carrier = makeShip('carrier');
 const AIShips = [p2Carrier, p2Battleship, p2Destroyer, p2Sub, p2Ptb];
 
-// AI place ships
-// p2Board.place(p2Ptb, 0, 1, 'y');
-// p2Board.place(p2Sub, 2, 6, 'y');
-// p2Board.place(p2Destroyer, 4, 2, 'y');
-// p2Board.place(p2Battleship, 6, 6, 'y');
-// p2Board.place(p2Carrier, 8, 4, 'y');
-
 // Render Boards
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
@@ -54,13 +47,9 @@ renderBoard(p2Board, p2Box);
 AIPlaceShipPhase(p2Board, AIShips, p2);
 playerPlaceShipPhase(p1Board, p1Ships);
 
-// MAIN GAME LOOP - will need loop
+// MAIN GAME LOOP
 
 // Player attack
-
-// ################################
-// Right now UIAttack is immediately going before player places ships
-// ################################
 
 document.addEventListener('shipsPlaced', () => UIAttack(p2Board));
 // UIAttack(p2Board);
