@@ -16,9 +16,11 @@ let p2;
 let p1Board;
 let p2Board;
 let p1Ships;
+let currentPlayer;
 
 // Used to tell game.js when playerPlaceShipPhase is over
 const shipsPlaced = new Event("shipsPlaced");
+const gameOverEvent = new Event("gameOver");
 
 // For AIPlaceShipPhase
 let j = 0;
@@ -83,7 +85,6 @@ const clickToPlace = (e, board, ship) => {
   removeListeners();
   if (i === 5) {
     document.dispatchEvent(shipsPlaced);
-    console.log("fired");
   }
   playerPlaceShipPhase(p1Board, p1Ships);
 };
@@ -189,7 +190,12 @@ const attackCallback = (e, board) => {
     el.replaceWith(el.cloneNode());
   });
 
-  setTimeout(AIAttack, 3000);
+  if(!board.isGameOver()) {
+    setTimeout(AIAttack, 3000);
+  } else {
+    document.dispatchEvent(gameOverEvent);
+  }
+  
 };
 
 // Player attack phase - adds click event listener and hover effect
@@ -215,31 +221,36 @@ const updateBoard = (board, player, x, y) => {
 }
 
 function AIAttack() {
-  p2.attack();
-  const [ x, y ] = p2.getLastShot();
-  updateBoard(p1Board, '#p1', x, y);
-  if(typeof p1Board.getMap()[x][y] === 'object') {
-    const ship = p1Board.getMap()[x][y][0].type;
-    narrative.textContent = `All hands on deck! Your ${ship} is taking fire!`
+  currentPlayer = 2;
+  if(!p1Board.isGameOver()) {
+    p2.attack();
+    const [ x, y ] = p2.getLastShot();
+    updateBoard(p1Board, '#p1', x, y);
+    if(typeof p1Board.getMap()[x][y] === 'object') {
+      const ship = p1Board.getMap()[x][y][0].type;
+      narrative.textContent = `All hands on deck! Your ${ship} is taking fire!`
+    } else {
+      narrative.textContent = 'Enemy fire missed ...';
+    }
   } else {
-    narrative.textContent = 'Enemy fire missed ...';
+    document.dispatchEvent(gameOverEvent);
   }
 }
 
 function attackPhase(playerTwo, playerTwoBoard) {
+  currentPlayer = 1;
   p2 = playerTwo;
   p2Board = playerTwoBoard;
-
   playerAttack(p2Board);
-
-
 }
-// loop
-//  let the player attack
-//  update the DOM to reflect the board shot
-//  AIattack
-//  update DOM to reflect hits
-// 
+
+function gameOver() {
+  if(currentPlayer === 1) {
+   narrative.textContent = `Glorious victory! You sunk all the AI ships!`;
+  } else {
+    narrative.textContent = 'Crushing defeat ... The AI has sunk all of your ships!';
+  }
+}
 
 export {
   p1Box,
@@ -250,4 +261,5 @@ export {
   renderBoard,
   playerAttack,
   attackPhase,
+  gameOver,
 };
