@@ -156,16 +156,30 @@ const renderBoard = (board, box) => {
   box.append(grid);
 };
 
+const updateBoard = (board, x, y) => {
+  const square = document.querySelector(`#p2 .square[data-x="${x}"][data-y="${y}"]`);
+  const boardValue = board.getMap()[x][y];
+
+  if(boardValue === 0) {
+    square.classList.add('miss');
+  }
+  if(typeof boardValue === 'object') {
+    square.classList.add('red');
+  }
+  console.log('value', boardValue, 'coords', square);
+}
+
 // Player attack phase - sends x, y from clicked square to board.incoming()
 const attackCallback = (e, board) => {
   const { x, y } = e.target.dataset;
+  updateBoard(board, x, y);
   board.incoming(x, y);
-  const squares = document.querySelectorAll("#p2 .square");
-  
+
   // Remove hover effect and click to attack 
+  const squares = document.querySelectorAll("#p2 .square");
   squares.forEach((el) => {
-    el.removeEventListener("click", attackCallback);
     el.classList.remove("hoverable");
+    el.replaceWith(el.cloneNode());
   });
   console.log(board.getMap());
 };
