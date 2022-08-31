@@ -191,7 +191,7 @@ const attackCallback = (e, board) => {
   });
 
   if(!board.isGameOver()) {
-    setTimeout(AIAttack, 3000);
+    setTimeout(AIAttack, 1000);
   } else {
     document.dispatchEvent(gameOverEvent);
   }
@@ -232,6 +232,7 @@ function AIAttack() {
     } else {
       narrative.textContent = 'Enemy fire missed ...';
     }
+    playerAttack(p2Board);
   } else {
     document.dispatchEvent(gameOverEvent);
   }
