@@ -173,6 +173,12 @@ const attackCallback = (e, board) => {
   const { x, y } = e.target.dataset;
   
   // Update DOM and board
+  if(typeof board.getMap()[x][y] === 'object') {
+    const ship = board.getMap()[x][y][0].type;
+    narrative.textContent = `Direct hit on the enemy's ${ship}!!! Prepare for incoming fire ...`;
+  } else {
+    narrative.textContent = 'You missed! Prepare for incoming fire ...';
+  }
   updateAIBoard(board, x, y);
   board.incoming(x, y);
 
@@ -182,8 +188,6 @@ const attackCallback = (e, board) => {
     el.classList.remove("hoverable");
     el.replaceWith(el.cloneNode());
   });
-
-
 
   setTimeout(AIAttack, 2000);
 };
