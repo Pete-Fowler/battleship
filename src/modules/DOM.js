@@ -156,7 +156,7 @@ const renderBoard = (board, box) => {
   box.append(grid);
 };
 
-const updateBoard = (board, x, y) => {
+const updateAIBoard = (board, x, y) => {
   const square = document.querySelector(`#p2 .square[data-x="${x}"][data-y="${y}"]`);
   const boardValue = board.getMap()[x][y];
 
@@ -166,13 +166,14 @@ const updateBoard = (board, x, y) => {
   if(typeof boardValue === 'object') {
     square.classList.add('red');
   }
-  console.log('value', boardValue, 'coords', square);
 }
 
 // Player attack phase - sends x, y from clicked square to board.incoming()
 const attackCallback = (e, board) => {
   const { x, y } = e.target.dataset;
-  updateBoard(board, x, y);
+  
+  // Update DOM and board
+  updateAIBoard(board, x, y);
   board.incoming(x, y);
 
   // Remove hover effect and click to attack 
@@ -181,7 +182,10 @@ const attackCallback = (e, board) => {
     el.classList.remove("hoverable");
     el.replaceWith(el.cloneNode());
   });
-  console.log(board.getMap());
+
+
+
+  setTimeout(AIAttack, 2000);
 };
 
 // Player attack phase - adds click event listener and hover effect
@@ -194,11 +198,31 @@ const playerAttack = (board) => {
   narrative.textContent = "Click to fire on the enemy fleet";
 };
 
+const updateBoard = (board, player, x, y) => {
+  const square = document.querySelector(`${player} .square[data-x="${x}"][data-y="${y}"]`);
+  const boardValue = board.getMap()[x][y];
+
+  if(boardValue === 0) {
+    square.classList.add('miss');
+  }
+  if(typeof boardValue === 'object') {
+    square.classList.add('red');
+  }
+}
+
+function AIAttack() {
+  p2.attack();
+  const [ x, y ] = p2.getLastShot();
+  updateBoard(p1Board, '#p1', x, y);
+}
+
 function attackPhase(playerTwo, playerTwoBoard) {
   p2 = playerTwo;
   p2Board = playerTwoBoard;
 
   playerAttack(p2Board);
+
+
 }
 // loop
 //  let the player attack
