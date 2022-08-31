@@ -7,7 +7,7 @@ import {
   playerPlaceShipPhase, 
   AIPlaceShipPhase,
   renderBoard, 
-  playerAttack,
+  attackPhase,
 } from "./DOM";
 
 
@@ -51,7 +51,7 @@ playerPlaceShipPhase(p1Board, p1Ships);
 
 // Player attack
 
-document.addEventListener('shipsPlaced', () => playerAttack(p2Board));
+document.addEventListener('shipsPlaced', () => attackPhase(p2, p2Board));
 // UIAttack(p2Board);
 
 // Gameover - after exit loop

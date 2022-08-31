@@ -161,6 +161,8 @@ const attackCallback = (e, board) => {
   const { x, y } = e.target.dataset;
   board.incoming(x, y);
   const squares = document.querySelectorAll("#p2 .square");
+  
+  // Remove hover effect and click to attack 
   squares.forEach((el) => {
     el.removeEventListener("click", attackCallback);
     el.classList.remove("hoverable");
@@ -181,7 +183,15 @@ const playerAttack = (board) => {
 function attackPhase(playerTwo, playerTwoBoard) {
   p2 = playerTwo;
   p2Board = playerTwoBoard;
+
+  playerAttack(p2Board);
 }
+// loop
+//  let the player attack
+//  update the DOM to reflect the board shot
+//  AIattack
+//  update DOM to reflect hits
+// 
 
 export {
   p1Box,
