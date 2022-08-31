@@ -189,7 +189,7 @@ const attackCallback = (e, board) => {
     el.replaceWith(el.cloneNode());
   });
 
-  setTimeout(AIAttack, 2000);
+  setTimeout(AIAttack, 3000);
 };
 
 // Player attack phase - adds click event listener and hover effect
@@ -218,6 +218,12 @@ function AIAttack() {
   p2.attack();
   const [ x, y ] = p2.getLastShot();
   updateBoard(p1Board, '#p1', x, y);
+  if(typeof p1Board.getMap()[x][y] === 'object') {
+    const ship = p1Board.getMap()[x][y][0].type;
+    narrative.textContent = `All hands on deck! Your ${ship} is taking fire!`
+  } else {
+    narrative.textContent = 'Enemy fire missed ...';
+  }
 }
 
 function attackPhase(playerTwo, playerTwoBoard) {
