@@ -181,6 +181,9 @@ const attackCallback = (e, board) => {
      el.replaceWith(el.cloneNode());
    });
 
+   updateAIBoard(board, x, y);
+   board.incoming(x, y);
+   
   // Update DOM and board
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
@@ -191,8 +194,7 @@ const attackCallback = (e, board) => {
     narrative.textContent = `Direct hit on the enemy's ${ship.type}!!! Prepare for incoming fire ...`;
     }
   }
-  updateAIBoard(board, x, y);
-  board.incoming(x, y);
+ 
 
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 1000);
