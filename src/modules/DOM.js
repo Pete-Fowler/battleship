@@ -192,6 +192,7 @@ const attackCallback = (e, board) => {
     }
   }
  
+  console.log('p2b', board.getMap());
 
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 1000);
@@ -213,11 +214,11 @@ const playerAttack = (board) => {
   turn += 1;
 };
 
-const updateBoard = (board, player, x, y) => {
-  const square = document.querySelector(`${player} .square[data-x="${x}"][data-y="${y}"]`);
+const updateBoard = (board, x, y) => {
+  const square = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y}"]`);
   const boardValue = board.getMap()[x][y];
-
-  if(boardValue === 0) {
+  console.log(board.getMap()[x][y]);
+  if(boardValue === 1) {
     square.classList.add('miss');
   }
   if(typeof boardValue === 'object') {
@@ -230,13 +231,12 @@ function AIAttack() {
   if(!p1Board.isGameOver()) {
     p2.attack();
     const [ x, y ] = p2.getLastShot();
-    
-    updateBoard(p1Board, '#p1', x, y);
+    updateBoard(p1Board, x, y);
     playerAttack(p2Board);
   } else if(p1Board.isGameOver()) {
     document.dispatchEvent(gameOverEvent);
   }
-  console.log('p1b', p1Board);
+  console.log('p1b', p1Board.getMap());
 }
 
 function attackPhase(playerTwo, playerTwoBoard) {

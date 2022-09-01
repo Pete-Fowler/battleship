@@ -21,8 +21,8 @@ const p2Board = gameBoard();
 p2Board.init();
 
 // Make players
-const p1 = player('1', p1Board, "human");
-const p2 = player("2",p2Board, "AI");
+const p1 = player('1', p2Board, "human");
+const p2 = player("2", p1Board, "AI");
 
 // Make p1 ships
 const p1Ptb = makeShip('patrol boat');
