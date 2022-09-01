@@ -18,7 +18,7 @@ const makeShip = (type) => {
     hull[index] = 1;
   };
   const isSunk = () => hull.every((x) => x === 1);
-  return { length, type, hit, isSunk, hull, getHull }; // Hull is returned now only for testing
+  return { length, type, hit, isSunk, getHull }; 
 };
 
 export default makeShip;

@@ -37,8 +37,8 @@ describe('game board', () => {
     board.incoming(5, 4);
     board.incoming(4, 4);
     board.incoming(3, 4);
-    expect(patrol.hull[1]).toEqual(1);
-    expect(patrol.hull[0]).toEqual(1);
+    expect(patrol.getHull()[1]).toEqual(1);
+    expect(patrol.getHull()[0]).toEqual(1);
     expect(board.getSunkShips()).toEqual(1);
     expect(board.getMap()[3][4]).toEqual(1);
   });

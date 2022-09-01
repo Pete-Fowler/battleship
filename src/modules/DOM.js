@@ -161,7 +161,7 @@ const updateAIBoard = (board, x, y) => {
   const square = document.querySelector(`#p2 .square[data-x="${x}"][data-y="${y}"]`);
   const boardValue = board.getMap()[x][y];
 
-  if(boardValue === 0) {
+  if(boardValue === 0 || boardValue === 1) {
     square.classList.add('miss');
   }
   if(typeof boardValue === 'object') {
@@ -173,22 +173,21 @@ const updateAIBoard = (board, x, y) => {
 const attackCallback = (e, board) => {
   const { x, y } = e.target.dataset;
   
+   // Remove hover effect and click to attack 
+   const squares = document.querySelectorAll("#p2 .square");
+   squares.forEach((el) => {
+     el.classList.remove("hoverable");
+     el.replaceWith(el.cloneNode());
+   });
+
   // Update DOM and board
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0].type;
     narrative.textContent = `Direct hit on the enemy's ${ship}!!! Prepare for incoming fire ...`;
-  } else {
-    narrative.textContent = 'You missed! Prepare for incoming fire ...';
-  }
+  } 
+  
   updateAIBoard(board, x, y);
   board.incoming(x, y);
-
-  // Remove hover effect and click to attack 
-  const squares = document.querySelectorAll("#p2 .square");
-  squares.forEach((el) => {
-    el.classList.remove("hoverable");
-    el.replaceWith(el.cloneNode());
-  });
 
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 1000);

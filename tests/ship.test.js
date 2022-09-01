@@ -13,7 +13,7 @@ describe('ship factory', () => {
   test('2 hits', () => {
     testSub.hit(1);
     testSub.hit(2);
-    expect(testSub.hull).toEqual([0, 1, 1]);
+    expect(testSub.getHull()).toEqual([0, 1, 1]);
   })
   test('Sunk', () => {
     testSub.hit(0);
