@@ -7,7 +7,8 @@ import {
   playerPlaceShipPhase, 
   AIPlaceShipPhase,
   renderBoard, 
-  UIAttack,
+  attackPhase,
+  gameOver,
 } from "./DOM";
 
 
@@ -39,13 +40,6 @@ const p2Battleship = makeShip('battleship');
 const p2Carrier = makeShip('carrier');
 const AIShips = [p2Carrier, p2Battleship, p2Destroyer, p2Sub, p2Ptb];
 
-// AI place ships
-// p2Board.place(p2Ptb, 0, 1, 'y');
-// p2Board.place(p2Sub, 2, 6, 'y');
-// p2Board.place(p2Destroyer, 4, 2, 'y');
-// p2Board.place(p2Battleship, 6, 6, 'y');
-// p2Board.place(p2Carrier, 8, 4, 'y');
-
 // Render Boards
 renderBoard(p1Board, p1Box);
 renderBoard(p2Board, p2Box);
@@ -54,23 +48,9 @@ renderBoard(p2Board, p2Box);
 AIPlaceShipPhase(p2Board, AIShips, p2);
 playerPlaceShipPhase(p1Board, p1Ships);
 
-// MAIN GAME LOOP - will need loop
+// Player attack phase - event fires once all ships are placed, and moves into 
+// attack phase
+document.addEventListener('shipsPlaced', () => attackPhase(p2, p2Board));
 
-// Player attack
-// UIAttack(p2Board);
-
-
-// AI attack
-
-// Gameover - after exit loop
-
-
-// The game loop should set up a new game by creating Players and Gameboards.
-// For now just populate each Gameboard with predetermined coordinates. You can
-// implement a system for allowing players to place their ships later.
-// The game loop should step through the game turn by turn using only methods 
-// from other objects. If at any point you are tempted to write a new function 
-// inside the game loop, step back and figure out which class or module that 
-// function should belong to.
-// Create conditions so that the game ends once one players ships have all 
-// been sunk. This function is appropriate for the Game module.
+// Gameover
+document.addEventListener('gameOver', gameOver);

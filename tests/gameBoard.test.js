@@ -70,7 +70,7 @@ describe('game board', () => {
     board.incoming(2, 3); 
     board.incoming(0, 4); // ptb
     board.incoming(1, 4);
-    expect(board.gameOver()).toEqual(true);
+    expect(board.isGameOver()).toEqual(true);
   })
   test('Collision check - tests for wall collision', () => {
     const carrier = makeShip('carrier');

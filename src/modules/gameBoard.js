@@ -63,11 +63,9 @@ const gameBoard = () => {
       }
     }
   };
-  const gameOver = () => true; // to be edited
-
-  const isGameOver = (n) => {
-    if (n === 5) {
-      gameOver();
+  const isGameOver = () => {
+    if (sunkShips === 5) {
+      return true;
     }
   };
   const testIfSunk = (ship) => {
@@ -95,7 +93,6 @@ const gameBoard = () => {
     getMap,
     checkCollision,
     place,
-    gameOver,
     isGameOver,
     testIfSunk,
     incoming,
