@@ -17,6 +17,7 @@ let p1Board;
 let p2Board;
 let p1Ships;
 let currentPlayer;
+let turn = 0;
 
 // Used to tell game.js when playerPlaceShipPhase is over
 const shipsPlaced = new Event("shipsPlaced");
@@ -182,10 +183,14 @@ const attackCallback = (e, board) => {
 
   // Update DOM and board
   if(typeof board.getMap()[x][y] === 'object') {
-    const ship = board.getMap()[x][y][0].type;
-    narrative.textContent = `Direct hit on the enemy's ${ship}!!! Prepare for incoming fire ...`;
-  } 
-  
+    const ship = board.getMap()[x][y][0];
+    console.log(ship.isSunk());
+    if(ship.isSunk()) {
+      narrative.textContent = `You've sunk the enemy's ${ship.type}!!!`
+    } else {
+    narrative.textContent = `Direct hit on the enemy's ${ship.type}!!! Prepare for incoming fire ...`;
+    }
+  }
   updateAIBoard(board, x, y);
   board.incoming(x, y);
 
@@ -194,7 +199,6 @@ const attackCallback = (e, board) => {
   } else {
     document.dispatchEvent(gameOverEvent);
   }
-  
 };
 
 // Player attack phase - adds click event listener and hover effect
@@ -204,7 +208,10 @@ const playerAttack = (board) => {
     el.addEventListener("click", (e) => attackCallback(e, board));
     el.classList.add("hoverable");
   });
-  narrative.textContent = "Click to fire on the enemy fleet";
+  if(turn === 0) {
+    narrative.textContent = "Click to fire on the enemy fleet";
+  }
+  turn += 1;
 };
 
 const updateBoard = (board, player, x, y) => {
