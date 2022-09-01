@@ -66,6 +66,7 @@ describe('game board', () => {
     board.incoming(1, 2);
     board.incoming(2, 2);
     board.incoming(0, 3); // sub
+    expect(board.isGameOver()).toEqual(false);
     board.incoming(1, 3);
     board.incoming(2, 3); 
     board.incoming(0, 4); // ptb
