@@ -73,6 +73,7 @@ const gameBoard = () => {
     if (sunkShips === 5) {
       return true;
     }
+    return false;
   };
  
   const testIfSunk = (ship) => {

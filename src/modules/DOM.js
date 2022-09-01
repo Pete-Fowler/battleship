@@ -187,7 +187,6 @@ const attackCallback = (e, board) => {
   // Update DOM and board
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
-    console.log(ship.isSunk());
     if(ship.isSunk()) {
       narrate(`You've sunk the enemy's ${ship.type}!!!`);
     }

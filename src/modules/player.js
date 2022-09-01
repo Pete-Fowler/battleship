@@ -12,10 +12,13 @@ const player = (moniker, board, typeOfPlayer) => {
   let lastShot;
   const getLastShot = () => lastShot;
   const AImap = Array(10); // 0 is unknown, 1 is miss, 2 is hit
+  
   for (let i = 0; i < AImap.length; i += 1) {
     AImap[i] = Array(10).fill(0);
   }
+  
   const getMap = () => AImap;
+ 
   const AIPlaceShip = (AIBoard, ship) => {
     let x;
     let y;
