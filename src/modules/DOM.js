@@ -181,18 +181,18 @@ const attackCallback = (e, board) => {
      el.replaceWith(el.cloneNode());
    });
 
+   updateAIBoard(board, x, y);
+   board.incoming(x, y);
+   
   // Update DOM and board
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
     console.log(ship.isSunk());
     if(ship.isSunk()) {
-      narrative.textContent = `You've sunk the enemy's ${ship.type}!!!`
-    } else {
-    narrative.textContent = `Direct hit on the enemy's ${ship.type}!!! Prepare for incoming fire ...`;
+      narrate(`You've sunk the enemy's ${ship.type}!!!`);
     }
   }
-  updateAIBoard(board, x, y);
-  board.incoming(x, y);
+ 
 
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 1000);
@@ -209,7 +209,7 @@ const playerAttack = (board) => {
     el.classList.add("hoverable");
   });
   if(turn === 0) {
-    narrative.textContent = "Click to fire on the enemy fleet";
+    narrate("Click to fire on the enemy fleet");
   }
   turn += 1;
 };
@@ -231,13 +231,8 @@ function AIAttack() {
   if(!p1Board.isGameOver()) {
     p2.attack();
     const [ x, y ] = p2.getLastShot();
+    
     updateBoard(p1Board, '#p1', x, y);
-    if(typeof p1Board.getMap()[x][y] === 'object') {
-      const ship = p1Board.getMap()[x][y][0].type;
-      narrative.textContent = `All hands on deck! Your ${ship} is taking fire!`
-    } else {
-      narrative.textContent = 'Enemy fire missed ...';
-    }
     playerAttack(p2Board);
   } else {
     document.dispatchEvent(gameOverEvent);
@@ -253,10 +248,17 @@ function attackPhase(playerTwo, playerTwoBoard) {
 
 function gameOver() {
   if(currentPlayer === 1) {
-   narrative.textContent = `Glorious victory! You sunk all the AI ships!`;
+    narrate(`Glorious victory! You sunk all the AI ships!`);
   } else {
-    narrative.textContent = 'Crushing defeat ... The AI has sunk all of your ships!';
+    narrate('Crushing defeat ... The AI has sunk all of your ships!');
   }
+}
+
+function narrate(message) {
+  narrative.textContent = message;
+  setTimeout(() => {
+    narrative.textContent = '';
+  }, 4000)
 }
 
 export {
