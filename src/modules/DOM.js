@@ -195,7 +195,7 @@ const attackCallback = (e, board) => {
 
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 1000);
-  } else {
+  } else if(board.isGameOver()) {
     document.dispatchEvent(gameOverEvent);
   }
 };
@@ -233,9 +233,10 @@ function AIAttack() {
     
     updateBoard(p1Board, '#p1', x, y);
     playerAttack(p2Board);
-  } else {
+  } else if(p1Board.isGameOver()) {
     document.dispatchEvent(gameOverEvent);
   }
+  console.log('p1b', p1Board);
 }
 
 function attackPhase(playerTwo, playerTwoBoard) {
