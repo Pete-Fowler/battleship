@@ -3,8 +3,8 @@ const player = (moniker, board, typeOfPlayer) => {
   const type = typeOfPlayer;
   const boardOfAttack = board;
 
-  // AI data
-  let a;
+  // AI data for coords of shot
+  let a;    
   let b;
   let lastShot;
 
@@ -43,6 +43,7 @@ const player = (moniker, board, typeOfPlayer) => {
     AImap[a][b] = 1;
     lastShot = [a, b];
   };
+  
   const pickAdjacentCoordinates = () => {
     const [ i, j ] = lastShot;    
     let adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
@@ -99,7 +100,7 @@ const player = (moniker, board, typeOfPlayer) => {
       boardOfAttack.incoming(x, y);
 
       // AI attack branch
-    } else if(boardOfAttack.getLastShotHit()) {
+    } else if(boardOfAttack.getLastShotHit()) { 
         pickAdjacentCoordinates();
         boardOfAttack.incoming(a, b);
       } else {
