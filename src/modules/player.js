@@ -108,6 +108,21 @@ const player = (moniker, board, typeOfPlayer) => {
       }
     }
   
+// AI Attack
+// generate a random shot
+// if it misses, repeat until hit
+// on hit
+//  save the hit coords
+//  identify adjacent shots that are available
+//  save all those
+//  fire at one of these
+//  on miss, fire at another, if none, random across board
+//  on hit, if sunk, go back to random
+//    else establish axis and save it
+//    fire along this axis until sunk
+//  go back to random 
+
+
   return {
     name,
     type,
