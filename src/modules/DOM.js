@@ -193,7 +193,7 @@ const attackCallback = (e, board) => {
   }
  
   if(!board.isGameOver()) {
-    setTimeout(AIAttack, 1000);
+    setTimeout(AIAttack, 500);
   } else if(board.isGameOver()) {
     document.dispatchEvent(gameOverEvent);
   }
@@ -216,7 +216,6 @@ const playerAttack = (board) => {
 const updateBoard = (board, x, y) => {
   const square = document.querySelector(`#p1 .square[data-x="${x}"][data-y="${y}"]`);
   const boardValue = board.getMap()[x][y];
-  console.log(board.getMap()[x][y]);
   if(boardValue === 1) {
     square.classList.add('miss');
   }
@@ -227,10 +226,13 @@ const updateBoard = (board, x, y) => {
 
 function AIAttack() {
   currentPlayer = 2;
-  if(!p1Board.isGameOver()) {
+ 
     p2.attack();
     const [ x, y ] = p2.getLastShot();
     updateBoard(p1Board, x, y);
+console.table({xy: [x, y]})
+
+    if(!p1Board.isGameOver()) {
     playerAttack(p2Board);
   } else if(p1Board.isGameOver()) {
     document.dispatchEvent(gameOverEvent);

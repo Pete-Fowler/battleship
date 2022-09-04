@@ -89,7 +89,7 @@ const player = (moniker, board, typeOfPlayer) => {
     // Otherwise, randomly pick an adjacent shot
     do {
       [ a, b ] = adjacentShots[Math.floor(Math.random() * adjacentShots.length)];
-    } while (!JSON.stringify(adjacentShots).includes(JSON.stringify([a, b])));
+    } while (!JSON.stringify(adjacentShots).includes(JSON.stringify([a, b])) && AImap[a][b] !== 0);
       AImap[a][b] = 1;
       lastShot = [a, b];
   }
@@ -100,6 +100,10 @@ const player = (moniker, board, typeOfPlayer) => {
 
       // AI attack branch
     } else if(boardOfAttack.getLastShotHit()) { 
+        // Record a hit in AI's map
+        const [ c, d ] = lastShot;
+        AImap[c][d] = 2;
+
         pickAdjacentCoordinates();
         boardOfAttack.incoming(a, b);
       } else {
