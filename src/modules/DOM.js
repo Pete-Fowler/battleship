@@ -146,12 +146,12 @@ const renderBoard = (board, box) => {
     grid.className = "board";
   }
   // Individual squares on board
-  for (let i = 0; i <= 9; i += 1) {
-    for (let j = 9; j >= 0; j -= 1) {
+  for (let k = 0; k <= 9; k += 1) {
+    for (let l = 9; l >= 0; l -= 1) {
       const square = document.createElement("div");
       square.className = "square";
-      square.dataset.x = i;
-      square.dataset.y = j;
+      square.dataset.x = k;
+      square.dataset.y = l;
       grid.append(square);
     }
   }
@@ -192,8 +192,6 @@ const attackCallback = (e, board) => {
     }
   }
  
-  console.log('p2b', board.getMap());
-
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 1000);
   } else if(board.isGameOver()) {
@@ -203,6 +201,7 @@ const attackCallback = (e, board) => {
 
 // Player attack phase - adds click event listener and hover effect
 const playerAttack = (board) => {
+  currentPlayer = 1;
   const squares = document.querySelectorAll("#p2 .square");
   squares.forEach((el) => {
     el.addEventListener("click", (e) => attackCallback(e, board));
@@ -236,7 +235,6 @@ function AIAttack() {
   } else if(p1Board.isGameOver()) {
     document.dispatchEvent(gameOverEvent);
   }
-  console.log('p1b', p1Board.getMap());
 }
 
 function attackPhase(playerTwo, playerTwoBoard) {
