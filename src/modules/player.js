@@ -88,8 +88,7 @@ const player = (moniker, board, typeOfPlayer) => {
     
     // Otherwise, randomly pick an adjacent shot
     do {
-      a = Math.floor(Math.random() * 10);
-      b = Math.floor(Math.random() * 10);
+      [ a, b ] = adjacentShots[Math.floor(Math.random() * adjacentShots.length)];
     } while (!JSON.stringify(adjacentShots).includes(JSON.stringify([a, b])));
       AImap[a][b] = 1;
       lastShot = [a, b];
