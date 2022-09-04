@@ -126,6 +126,11 @@ const player = (moniker, board, typeOfPlayer) => {
 //    fire along this axis until sunk
 //  go back to random 
 
+// It needs variables:
+// currentlyAttackingShip
+// attackAxis
+// use boardOfAttack.getMap()[x][y][0].isSunk() each time to test if lastShot
+// sunk a ship in currentlyAttackgnShip phase
 
   return {
     name,
