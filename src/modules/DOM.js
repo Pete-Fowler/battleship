@@ -28,8 +28,10 @@ const gameOverEvent = new Event("gameOver");
 let j = 0;
 
 // Helper functions for playerPlaceShipPhase
-const switchAxis = () => {
+const switchAxis = (board) => {
+  renderShadow(lastCoordsRendered, "clear", board, lastShip);
   axis === "x" ? (axis = "y") : (axis = "x");
+  renderShadow(lastCoordsRendered, "fill", board, lastShip);
 };
 
 const renderShadow = (e, fill, board, ship) => {
@@ -99,9 +101,7 @@ const playerPlaceShip = (board, ship) => {
 
   const xBtn = document.querySelector('#x-btn');
   xBtn.addEventListener('click', () => {
-    renderShadow(lastCoordsRendered, "clear", board, lastShip);
-    switchAxis();
-    renderShadow(lastCoordsRendered, "fill", board, lastShip);
+    switchAxis(board);
   });
 
   squares.forEach((square) => {
@@ -117,9 +117,7 @@ const playerPlaceShip = (board, ship) => {
   if (i === 0) {
     window.addEventListener("keydown", (e) => {
       if (e.key === "x") {
-        renderShadow(lastCoordsRendered, "clear", board, lastShip);
-        switchAxis();
-        renderShadow(lastCoordsRendered, "fill", board, lastShip);
+        switchAxis(board);
       }
     });
   }
