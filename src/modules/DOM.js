@@ -307,6 +307,7 @@ function narrate(message) {
 }
 
 function handleTouchMove(e) {
+  e.preventDefault();
   const { x: a, y: b } = touched.dataset;
   const lastElement = touched;
 

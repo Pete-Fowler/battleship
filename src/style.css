@@ -125,16 +125,16 @@ body {
   }
 
   #narrative {
-    font-size: 6vw;
+    font-size: 5vw;
     padding: 0px 20px;
   }
   
   .board {
-    grid: repeat(10, 6vw) / repeat(10, 6vw);
+    grid: repeat(10, 7vw) / repeat(10, 7vw);
   }
   
   .square {
-    width: 6vw;
-    height: 6vw;
+    width: 7vw;
+    height: 7vw;
   }
 }
