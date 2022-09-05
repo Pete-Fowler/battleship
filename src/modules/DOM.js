@@ -43,6 +43,7 @@ const switchAxis = (board) => {
   } else {
     axis === "x" ? (axis = "y") : (axis = "x");
   }
+ switchAxisNarrative();
 };
 
 const renderShadow = (coords, fill, board, ship) => {
@@ -108,13 +109,7 @@ const playerPlaceShip = (board, ship) => {
   shipBeingPlaced = ship;
   p1Board = board;
   const squares = document.querySelectorAll("#p1 .board .square");
-  narrative.innerHTML = `Lead your ${ship.type} into battle. \n 
-  Hold click or press to highlight, release to place ship. Hit \n 
-  <span id='x-btn'>X</span> to steer.`;
-
-  const xBtn = document.querySelector('#x-btn');
-    xBtn.addEventListener('click', () => switchAxis(board));
-    xBtn.addEventListener('touch', () => switchAxis(board));
+  switchAxisNarrative();
 
   squares.forEach((square) => {
     square.addEventListener('mousedown', (e) => {
@@ -303,6 +298,16 @@ function narrate(message) {
   setTimeout(() => {
     narrative.textContent = '';
   }, 4000)
+}
+
+function switchAxisNarrative() {
+  narrative.innerHTML = `Lead your ${shipBeingPlaced.type} into battle. \n 
+  Hold click or press to highlight, release to place ship. Hit \n 
+  <span id='x-btn'>X</span> to steer. Current axis: ${axis}`;
+
+  const xBtn = document.querySelector('#x-btn');
+    xBtn.addEventListener('click', () => switchAxis(p1Board));
+    xBtn.addEventListener('touch', () => switchAxis(p1Board));
 }
 
 function handleTouchMove(e) {
