@@ -105,7 +105,8 @@ const player = (moniker, board, typeOfPlayer) => {
 
     // If no adjacent shots available, generate random shot and exit function
     if(test === false) {
-        pickCoordinates();
+        lastShotMissed = true;
+        pickAdjacentCoordinates();
         return;
       }
     
