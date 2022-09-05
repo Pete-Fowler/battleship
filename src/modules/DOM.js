@@ -36,14 +36,17 @@ let j = 0;
 
 // Helper functions for playerPlaceShipPhase
 const switchAxis = (board) => {
+  if(mouseTouchHold){
   renderShadow(lastCoordsRendered, "clear", board, lastShip);
   axis === "x" ? (axis = "y") : (axis = "x");
   renderShadow(lastCoordsRendered, "fill", board, lastShip);
+  } else {
+    axis === "x" ? (axis = "y") : (axis = "x");
+  }
 };
 
 const renderShadow = (coords, fill, board, ship) => {
   let [ x, y ] = coords;
-  console.log(x, y);
   let el;
   let collision = false;
   x = parseInt(x, 10);
@@ -85,15 +88,15 @@ const removeListeners = () => {
   window.removeEventListener("keydown", (e) => {});
 };
 
-const clickToPlace = (e, board, ship) => {
-  let { x, y } = e.target.dataset;
+const clickToPlace = (coords, board, ship) => {
+  let [ x, y ] = coords;
   x = parseInt(x, 10);
   y = parseInt(y, 10);
   if (board.checkCollision(ship, x, y, axis)) {
     return;
   }
   board.place(ship, x, y, axis);
-  renderShadow(e, "place", board, ship);
+  renderShadow(coords, "place", board, ship);
   removeListeners();
   if (i === 5) {
     document.dispatchEvent(shipsPlaced);
@@ -139,10 +142,14 @@ const playerPlaceShip = (board, ship) => {
       mouseTouchHold && renderShadow([x, y], "clear", board, ship)
     });
     square.addEventListener("touchend", (e) => {
-      const { x, y } = e.target.dataset;
-      mouseTouchHold && renderShadow([x, y], "clear", board, ship)
+      // const { x, y } = e.target.dataset;
+      // mouseTouchHold && renderShadow(lastCoordsRendered, "place", board, ship)
+      clickToPlace(lastCoordsRendered, board, ship);
     });
-    // square.addEventListener("click", (e) => clickToPlace(e, board, ship));
+    square.addEventListener("click", (e) => { 
+      const { x, y } = e.target.dataset;
+      clickToPlace([x, y], board, ship)
+    });
   });
 
   if (i === 0) {
@@ -313,12 +320,9 @@ function handleTouchMove(e) {
   let y = e.touches[0].clientY
   const currentElement = document.elementFromPoint(x, y);
 
-
   if(currentElement.classList.contains('square')) {
-    // console.log(currentElement, lastElement);
     ({ x, y } = currentElement.dataset);
     if(currentElement !== lastElement) {
-      console.log('new square');
       renderShadow([a, b], "clear", p1Board, shipBeingPlaced);
       renderShadow([x, y], 'fill', p1Board, shipBeingPlaced);
       touched = currentElement;
