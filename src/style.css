@@ -112,17 +112,14 @@ body {
 }
 
 @media (max-width: 550px) {
-  body {
-    width: 100vw;
-    height: 100vh;
-  }
 
   #main {
     grid:
       'narrative' 75px
-      'p1' 1fr 
+      'p1' .8fr 
       'p2' 1fr
       /1fr;
+    align-items: flex-start;
   }
 
   #header {
@@ -134,8 +131,13 @@ body {
     padding: 0px 20px;
   }
   
+  #p1 {
+    padding-top: 10px;
+  }
+
   .board {
     grid: repeat(10, 5vw) / repeat(10, 5vw);
+    gap: 2px;
   }
   
   .square {
