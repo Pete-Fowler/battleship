@@ -4,6 +4,7 @@
 const p1Box = document.querySelector("#p1");
 const p2Box = document.querySelector("#p2");
 const narrative = document.querySelector("#narrative");
+const main = document.querySelector('#main');
 
 // Used in switchAxis and renderShadow and playerPlaceShip
 let axis = "y";
@@ -92,7 +93,9 @@ const clickToPlace = (e, board, ship) => {
 
 const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll("#p1 .board .square");
-  narrative.textContent = `Lead your ${ship.type} into battle. Press X to steer.`;
+  narrative.innerHTML = `Lead your ${ship.type} into battle. \n 
+  Hold click or press to highlight, release to place ship. Hit \n 
+  <span id='x-btn'>X</span> to steer.`;
 
   squares.forEach((square) => {
     square.addEventListener("mouseover", (e) =>
