@@ -91,3 +91,42 @@ body {
 .miss {
   background-color: #9bd8ff;
 }
+
+@media (max-width: 800px) {
+  .board {
+    grid: repeat(10, 3vw) / repeat(10, 3vw);
+  }
+  
+  .square {
+    width: 3vw;
+    height: 3vw;
+  }
+}
+
+@media (max-width: 550px) {
+  #main {
+    grid:
+      'narrative' 75px
+      'p1' 1fr 
+      'p2' 1fr
+      /1fr;
+  }
+
+  #header {
+    font-size: 10vw;
+  }
+
+  #narrative {
+    font-size: 6vw;
+    padding: 0px 20px;
+  }
+  
+  .board {
+    grid: repeat(10, 6vw) / repeat(10, 6vw);
+  }
+  
+  .square {
+    width: 6vw;
+    height: 6vw;
+  }
+}
