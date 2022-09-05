@@ -231,6 +231,11 @@ function AIAttack() {
     const [ x, y ] = p2.getLastShot();
     updateBoard(p1Board, x, y);
 
+    if(p1Board.getLastShotHit()) {
+      const ship = p1Board.getMap()[x][y][0];
+      ship.isSunk() && narrate(`All hands on deck! Your ${ship.type} is sinking!!!`);
+    }
+
     if(!p1Board.isGameOver()) {
     playerAttack(p2Board);
   } else if(p1Board.isGameOver()) {
