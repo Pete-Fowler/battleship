@@ -230,7 +230,6 @@ function AIAttack() {
     p2.attack();
     const [ x, y ] = p2.getLastShot();
     updateBoard(p1Board, x, y);
-console.table({xy: [x, y]})
 
     if(!p1Board.isGameOver()) {
     playerAttack(p2Board);
