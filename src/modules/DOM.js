@@ -9,6 +9,11 @@ const narrative = document.querySelector("#narrative");
 let axis = "y";
 let lastCoordsRendered;
 let lastShip;
+let mouseTouchHold = false;
+window.addEventListener('mousedown', () => {mouseTouchHold = true;});
+window.addEventListener('mouseup', () => {mouseTouchHold = false;});
+window.addEventListener('touchstart', () => {mouseTouchHold = true});
+window.addEventListener('touchend', () => {mouseTouchHold = false});
 
 // Used for playerPlaceShipPhase and attackPhase
 let i = 0;
@@ -42,14 +47,14 @@ const renderShadow = (e, fill, board, ship) => {
   if (board.checkCollision(ship, x, y, axis) && fill !== "clear") {
     collision = true;
   }
-  for (let i = 0; i < ship.length; i += 1) {
+  for (let k = 0; k < ship.length; k += 1) {
     if (axis === "x") {
       el = document.querySelector(
-        `#p1 .square[data-x="${x + i}"][data-y="${y}"]`
+        `#p1 .square[data-x="${x + k}"][data-y="${y}"]`
       );
     } else {
       el = document.querySelector(
-        `#p1 .square[data-x="${x}"][data-y="${y + i}"]`
+        `#p1 .square[data-x="${x}"][data-y="${y + k}"]`
       );
     }
     if (el) {
@@ -104,13 +109,27 @@ const playerPlaceShip = (board, ship) => {
   });
 
   squares.forEach((square) => {
-    square.addEventListener("mouseover", (e) =>
-      renderShadow(e, "fill", board, ship)
-    );
-    square.addEventListener("mouseout", (e) =>
-      renderShadow(e, "clear", board, ship)
-    );
-    square.addEventListener("click", (e) => clickToPlace(e, board, ship));
+    square.addEventListener('mousedown', (e) => {
+      renderShadow(e, "fill", board, ship);
+    });
+    square.addEventListener('touchstart', (e) => {
+      renderShadow(e, "fill", board, ship);
+    });
+    square.addEventListener("mouseover", (e) => {
+      mouseTouchHold && renderShadow(e, "fill", board, ship);
+    });
+    
+    square.addEventListener("mouseout", (e) => {
+      mouseTouchHold && renderShadow(e, "clear", board, ship)
+    });
+
+    square.addEventListener("mouseup", (e) => {
+      mouseTouchHold && renderShadow(e, "clear", board, ship)
+    });
+    square.addEventListener("touchend", (e) => {
+      mouseTouchHold && renderShadow(e, "clear", board, ship)
+    });
+    // square.addEventListener("click", (e) => clickToPlace(e, board, ship));
   });
 
   if (i === 0) {
