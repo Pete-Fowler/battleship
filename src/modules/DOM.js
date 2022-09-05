@@ -97,6 +97,13 @@ const playerPlaceShip = (board, ship) => {
   Hold click or press to highlight, release to place ship. Hit \n 
   <span id='x-btn'>X</span> to steer.`;
 
+  const xBtn = document.querySelector('#x-btn');
+  xBtn.addEventListener('click', () => {
+    renderShadow(lastCoordsRendered, "clear", board, lastShip);
+    switchAxis();
+    renderShadow(lastCoordsRendered, "fill", board, lastShip);
+  });
+
   squares.forEach((square) => {
     square.addEventListener("mouseover", (e) =>
       renderShadow(e, "fill", board, ship)
