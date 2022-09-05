@@ -16,7 +16,7 @@ window.addEventListener('mousedown', () => {mouseTouchHold = true;});
 window.addEventListener('mouseup', () => {mouseTouchHold = false;});
 window.addEventListener('touchstart', () => {mouseTouchHold = true});
 window.addEventListener('touchend', () => {mouseTouchHold = false});
-window.addEventListener('touchmove', handleTouchMove);
+window.addEventListener('touchmove', handleTouchMove, {passive: false});
 
 // Used for playerPlaceShipPhase and attackPhase
 let i = 0;
@@ -113,9 +113,8 @@ const playerPlaceShip = (board, ship) => {
   <span id='x-btn'>X</span> to steer.`;
 
   const xBtn = document.querySelector('#x-btn');
-  xBtn.addEventListener('click', () => {
-    switchAxis(board);
-  });
+    xBtn.addEventListener('click', () => switchAxis(board));
+    xBtn.addEventListener('touch', () => switchAxis(board));
 
   squares.forEach((square) => {
     square.addEventListener('mousedown', (e) => {
