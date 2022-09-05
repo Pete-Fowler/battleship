@@ -4,7 +4,6 @@
 const p1Box = document.querySelector("#p1");
 const p2Box = document.querySelector("#p2");
 const narrative = document.querySelector("#narrative");
-const main = document.querySelector('#main');
 
 // Used in switchAxis and renderShadow and playerPlaceShip
 let axis = "y";
