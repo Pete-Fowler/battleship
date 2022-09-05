@@ -9,5 +9,7 @@ Cannot compare 2 arrays??? Used JSON.stringify() on arrays in the AI adjacent sh
 
 Feel like the code could always be better organized, with more SRP and SOLID. The AI attack seemed especially messy. I would have moved the AI attack logic to a separate module, and would have separated the AI and human branches out of a single attack function into two in the player module.
 
+Also raised question of how to continue TDD after the app logic was done and I started working with the DOM. 
+
 return inside forEach does not return from overall function, only from lambda inside foreach, skipping one item. https://stackoverflow.com/questions/68322439/returnforeach-does-not-seem-to-exit-foreach
 
