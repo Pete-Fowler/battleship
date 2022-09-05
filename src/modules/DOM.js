@@ -304,7 +304,7 @@ function narrate(message) {
 function switchAxisNarrative() {
   narrative.innerHTML = `Lead your ${shipBeingPlaced.type} into battle. \n 
   Hold click or press to highlight, release to place ship. Hit \n 
-  <span id='x-btn'>X</span> to steer. Current axis: ${axis}`;
+  <span id='x-btn'>X</span> to switch axis.`;
 
   const xBtn = document.querySelector('#x-btn');
     xBtn.addEventListener('click', () => switchAxis(p1Board));
