@@ -130,11 +130,11 @@ body {
   }
   
   .board {
-    grid: repeat(10, 7vw) / repeat(10, 7vw);
+    grid: repeat(10, 6vw) / repeat(10, 6vw);
   }
   
   .square {
-    width: 7vw;
-    height: 7vw;
+    width: 6vw;
+    height: 6vw;
   }
 }
