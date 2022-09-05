@@ -248,9 +248,9 @@ function attackPhase(playerTwo, playerTwoBoard) {
 
 function gameOver() {
   if(currentPlayer === 1) {
-    narrate(`Glorious victory! You sunk all the AI ships!`);
+    narrative.textContent = `Glorious victory! You sunk all the AI ships!`;
   } else {
-    narrate('Crushing defeat ... The AI has sunk all of your ships!');
+    narrative.textContent = 'Crushing defeat ... The AI has sunk all of your ships!';
   }
 }
 
