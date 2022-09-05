@@ -112,6 +112,11 @@ body {
 }
 
 @media (max-width: 550px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+
   #main {
     grid:
       'narrative' 75px

@@ -313,6 +313,10 @@ function handleTouchMove(e) {
   let x = e.touches[0].clientX
   let y = e.touches[0].clientY
   const currentElement = document.elementFromPoint(x, y);
+  if(currentElement.parentNode.parentNode.id === 'p2') {
+    return;
+  } 
+  
 
   if(currentElement.classList.contains('square')) {
     ({ x, y } = currentElement.dataset);
