@@ -139,16 +139,10 @@ const playerPlaceShip = (board, ship) => {
 
     square.addEventListener("mouseup", (e) => {
       const { x, y } = e.target.dataset;
-      mouseTouchHold && renderShadow([x, y], "clear", board, ship)
-    });
-    square.addEventListener("touchend", (e) => {
-      // const { x, y } = e.target.dataset;
-      // mouseTouchHold && renderShadow(lastCoordsRendered, "place", board, ship)
-      clickToPlace(lastCoordsRendered, board, ship);
-    });
-    square.addEventListener("click", (e) => { 
-      const { x, y } = e.target.dataset;
       clickToPlace([x, y], board, ship)
+    });
+    square.addEventListener("touchend", () => {
+      clickToPlace(lastCoordsRendered, board, ship);
     });
   });
 
