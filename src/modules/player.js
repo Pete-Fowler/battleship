@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-lonely-if */
 const player = (moniker, board, typeOfPlayer) => {
   const name = moniker;
   const type = typeOfPlayer;
@@ -8,8 +10,9 @@ const player = (moniker, board, typeOfPlayer) => {
   let b;
   let isAttackingShip = false;
   let attackAxis;
-  let lastHit;
+  let lastHit = null;
   let lastShot;
+  let lastShotMissed = false;
 
   const getLastShot = () => lastShot;
 
@@ -50,7 +53,11 @@ const player = (moniker, board, typeOfPlayer) => {
   
   const pickAdjacentCoordinates = () => {
     isAttackingShip = true;
-    const [ i, j ] = lastShot;    
+    let i;
+    let j;
+
+    lastShotMissed ? [ i, j ] = lastHit : [ i, j ] = lastShot;    
+    
     let adjacentShots = [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]];
 
     // Code to limit possible shots for edge of board   
@@ -105,32 +112,11 @@ const player = (moniker, board, typeOfPlayer) => {
     // Otherwise, randomly pick an adjacent shot
     do {
       [ a, b ] = adjacentShots[Math.floor(Math.random() * adjacentShots.length)];
-    } while (!JSON.stringify(adjacentShots).includes(JSON.stringify([a, b])) && AImap[a][b] !== 0);
+    } while (!JSON.stringify(adjacentShots).includes(JSON.stringify([a, b])) || AImap[a][b] !== 0);
       AImap[a][b] = 1;
       lastShot = [a, b];
   }
-  // AI Attack
-// generate a random shot
-// if it misses, repeat until hit
-// on hit
-//  save the hit coords
-//  identify adjacent shots that are available
-//  save all those
-//  if no axis established
-//    fire at one of these
-//  if axis established
-//    fire along axis
-//    on miss, fire at another, if none, random across board
-//  on hit, if sunk, go back to random
-//    else establish axis and save it
-//    fire along this axis until sunk
-//  go back to random 
 
-// It needs variables:
-// currentlyAttackingShip
-// attackAxis
-// use boardOfAttack.getMap()[x][y][0].isSunk() each time to test if lastShot
-// sunk a ship in currentlyAttackgnShip phase
   const attack = (x, y) => {
     // Human attack
     if (typeOfPlayer === "human") {
@@ -138,21 +124,43 @@ const player = (moniker, board, typeOfPlayer) => {
 
     // AI attack branch
     } else if(boardOfAttack.getLastShotHit()) { 
+      lastShotMissed = false;
+      isAttackingShip = true;
       // Record a hit in AI's map
       const [ c, d ] = lastShot;
       AImap[c][d] = 2;
-      lastHit = [c, d];
-        
+      
+      // If no previous hit for currently hit ship
+      if(lastHit === null) {
+        lastHit = lastShot;
+      } else {
+        if(lastHit[0] === lastShot[0]) {
+          attackAxis = 'y';
+        } else {
+          attackAxis = 'x';
+        }
+      }
+      
       if(boardOfAttack.getMap()[c][d][0].isSunk()) {
+        // Reset axis tracking
+        lastHit = null;
+        attackAxis = '';
+        
         pickCoordinates();
         boardOfAttack.incoming(a, b);
       } else {
+          pickAdjacentCoordinates();
+          boardOfAttack.incoming(a, b);
+      }
+    // From if last shot hit
+    } else if(isAttackingShip) {
+        lastShotMissed = true;
         pickAdjacentCoordinates();
         boardOfAttack.incoming(a, b);
-      }
     } else {
-      pickCoordinates();
-      boardOfAttack.incoming(a, b);
+        lastShotMissed = true;
+        pickCoordinates();
+        boardOfAttack.incoming(a, b);
     }
   }
 
