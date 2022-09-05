@@ -122,7 +122,7 @@ const playerPlaceShip = (board, ship) => {
     square.addEventListener('touchstart', (e) => {
       const { x, y } = e.target.dataset;
       renderShadow([x, y], "fill", board, ship);
-      touched = e;
+      touched = e.target;
     });
     square.addEventListener("mouseover", (e) => {
       const { x, y } = e.target.dataset;
@@ -306,16 +306,23 @@ function narrate(message) {
 }
 
 function handleTouchMove(e) {
-  const x = e.touches[0].clientX
-  const y = e.touches[0].clientY
+  const { x: a, y: b } = touched.dataset;
+  const lastElement = touched;
 
+  let x = e.touches[0].clientX
+  let y = e.touches[0].clientY
   const currentElement = document.elementFromPoint(x, y);
 
-  if(currentElement !== touched.target) {
-    console.log('new square');
-    renderShadow(touched, "clear", p1Board, shipBeingPlaced);
-    renderShadow(e, 'fill', p1Board, shipBeingPlaced);
-    touched = e;
+
+  if(currentElement.classList.contains('square')) {
+    // console.log(currentElement, lastElement);
+    ({ x, y } = currentElement.dataset);
+    if(currentElement !== lastElement) {
+      console.log('new square');
+      renderShadow([a, b], "clear", p1Board, shipBeingPlaced);
+      renderShadow([x, y], 'fill', p1Board, shipBeingPlaced);
+      touched = currentElement;
+    }
   }
 }
 
