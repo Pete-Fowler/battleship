@@ -101,6 +101,7 @@ const clickToPlace = (coords, board, ship) => {
   removeListeners();
   if (i === 5) {
     document.dispatchEvent(shipsPlaced);
+    window.removeEventListener('touchmove', handleTouchMove, {passive: false});
   }
   playerPlaceShipPhase(p1Board, p1Ships);
 };
