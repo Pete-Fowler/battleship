@@ -113,10 +113,6 @@ const playerPlaceShip = (board, ship) => {
   switchAxisNarrative();
 
   squares.forEach((square) => {
-    square.addEventListener('mousedown', (e) => {
-      const { x, y } = e.target.dataset;
-      renderShadow([x, y], "fill", board, ship);
-    });
     square.addEventListener('touchstart', (e) => {
       const { x, y } = e.target.dataset;
       renderShadow([x, y], "fill", board, ship);
@@ -124,20 +120,19 @@ const playerPlaceShip = (board, ship) => {
     });
     square.addEventListener("mouseover", (e) => {
       const { x, y } = e.target.dataset;
-      mouseTouchHold && renderShadow([x, y], "fill", board, ship);
+      renderShadow([x, y], "fill", board, ship);
     });
 
     square.addEventListener("mouseout", (e) => {
       const { x, y } = e.target.dataset;
-      mouseTouchHold && renderShadow([x, y], "clear", board, ship)
-    });
-
-    square.addEventListener("mouseup", (e) => {
-      const { x, y } = e.target.dataset;
-      clickToPlace([x, y], board, ship)
+      renderShadow([x, y], "clear", board, ship)
     });
     square.addEventListener("touchend", () => {
       clickToPlace(lastCoordsRendered, board, ship);
+    });
+    square.addEventListener("click", (e) => {
+      const { x, y } = e.target.dataset;
+      clickToPlace([x, y], board, ship)
     });
   });
 
@@ -303,8 +298,9 @@ function narrate(message) {
 
 function switchAxisNarrative() {
   narrative.innerHTML = `Lead your ${shipBeingPlaced.type} into battle. \n 
-  Hold click or press to highlight, release to place ship. Hit \n 
-  <span id='x-btn'>X</span> to switch axis.`;
+  Mouse users hover over the board on the left, and click to place ship. \n 
+  Mobile users touch, hold, drag, and release. Hit <span id='x-btn'>X</span> \n 
+  to switch axis.`;
 
   const xBtn = document.querySelector('#x-btn');
     xBtn.addEventListener('click', () => switchAxis(p1Board));
