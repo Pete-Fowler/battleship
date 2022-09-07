@@ -5,6 +5,8 @@ const p1Box = document.querySelector("#p1");
 const p2Box = document.querySelector("#p2");
 const narrative = document.querySelector("#narrative");
 
+let muted;
+
 // Used in switchAxis and renderShadow and playerPlaceShip
 let axis = "y";
 let lastCoordsRendered;
@@ -102,6 +104,7 @@ const clickToPlace = (coords, board, ship) => {
     window.removeEventListener('touchmove', handleTouchMove, {passive: false});
   }
   playerPlaceShipPhase(p1Board, p1Ships);
+  startMusic();
 };
 
 const playerPlaceShip = (board, ship) => {
@@ -263,6 +266,7 @@ function AIAttack() {
     updateBoard(p1Board, x, y);
 
     if(p1Board.getLastShotHit()) {
+      window.navigator.vibrate(500);
       const ship = p1Board.getMap()[x][y][0];
       ship.isSunk() && narrate(`All hands on deck! Your ${ship.type} is sinking!!!`);
     }
@@ -329,9 +333,20 @@ function handleTouchMove(e) {
   }
 }
 
+const music = new Audio('../audio/the-shield-111353.mp3');
+function startMusic() {
+  music.addEventListener('canplaythrough', () => music.play());
+}
+
+function mute() {
+  music.stop();
+  muted = true;
+} 
+
 export {
   p1Box,
   p2Box,
+  startMusic,
   playerPlaceShip,
   playerPlaceShipPhase,
   AIPlaceShipPhase,
