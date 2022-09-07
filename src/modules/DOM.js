@@ -323,7 +323,6 @@ function handleTouchMove(e) {
     return;
   } 
   
-
   if(currentElement.classList.contains('square')) {
     ({ x, y } = currentElement.dataset);
     if(currentElement !== lastElement) {
