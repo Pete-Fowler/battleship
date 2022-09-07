@@ -1,6 +1,6 @@
 <a href='https://pete-fowler.github.io/battleship/'>Live page</a>
 
-This is a Battleship game where the user plays against an AI opponent. It was built with vanilla Javascript/CSS/HTML, and Jest, Webpack, Eslint, and Prettier. It was built with a responsive design and to also work on a mobile device. nThe goal of this project was to closely follow a test driven development workflow.
+This is a Battleship game where the user plays against an AI opponent. It was built with vanilla Javascript/CSS/HTML, plus Jest and Webpack. It was built with a responsive design and to also work on a mobile device. nThe goal of this project was to closely follow a test driven development workflow.
 
 I really enjoyed this workflow - write a test, make it pass. It was very helpful to force myself to do what developers should do - focus on one specific subproblem at a time, and think about the end result and how you will get there prior to slamming down some code and hoping for the best.
 
