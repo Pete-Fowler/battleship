@@ -10,7 +10,7 @@ body {
   background-position: center;
   display: grid;
   grid: 
-    'header' 75px
+    'header' .1fr
     'main' 1fr   
     /1fr;
   width: 100vw;
@@ -21,12 +21,12 @@ body {
 
 #header {
   display: flex;
-  font-size: 6vw;
+  font-size: 5.5vw;
   justify-content: center;
   align-items: center;
   grid-area: header;
   font-family: 'Black Ops One', cursive;
-  padding-top: 10px;
+  padding: 0px;
 }
 
 #main {
@@ -34,7 +34,7 @@ body {
   grid-area: main;
   display: grid;
   grid:
-    'narrative narrative' 75px
+    'narrative narrative' .2fr
     'p1        p2' 1fr
     /1fr       1fr;
   justify-items: center;
@@ -42,12 +42,12 @@ body {
 }
 
 #narrative {
-  font-size: 2.5vw;
+  font-size: 2.3vw;
   grid-area: narrative;
   position: relative;
   text-align: center;
   width: 100%;
-  padding: 0px 40px;
+  padding: 10px 40px;
 }
 
 #x-btn {
@@ -124,10 +124,11 @@ body {
 
   #header {
     font-size: 10vw;
+    padding-bottom: 10px;
   }
 
   #narrative {
-    font-size: 5vw;
+    font-size: 4vw;
     padding: 0px 20px;
   }
   
