@@ -91,6 +91,7 @@ const clickToPlace = (coords, board, ship) => {
   x = parseInt(x, 10);
   y = parseInt(y, 10);
   if (board.checkCollision(ship, x, y, axis)) {
+    renderShadow([x, y], 'clear', board, ship);
     return;
   }
   board.place(ship, x, y, axis);
