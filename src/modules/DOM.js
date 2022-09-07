@@ -302,7 +302,7 @@ function narrate(message) {
 
 function switchAxisNarrative() {
   narrative.innerHTML = `Lead your ${shipBeingPlaced.type} into battle. \n 
-  Mouse users hover over the board on the left, and click to place ship. \n 
+  Mouse users hover over the board, and click to place ship. \n 
   Mobile users touch, hold, drag, and release. Hit <span id='x-btn'>X</span> \n 
   to switch axis.`;
 
