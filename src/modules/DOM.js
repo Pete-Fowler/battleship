@@ -10,12 +10,12 @@ let axis = "y";
 let lastCoordsRendered;
 let lastShip;
 let shipBeingPlaced;
-let mouseTouchHold = false;
+let highlightSquares = false;
 let touched;
-window.addEventListener('mousedown', () => {mouseTouchHold = true;});
-window.addEventListener('mouseup', () => {mouseTouchHold = false;});
-window.addEventListener('touchstart', () => {mouseTouchHold = true});
-window.addEventListener('touchend', () => {mouseTouchHold = false});
+window.addEventListener('mousedown', () => {highlightSquares = true;});
+window.addEventListener('mouseup', () => {highlightSquares = false;});
+window.addEventListener('touchstart', () => {highlightSquares = true});
+window.addEventListener('touchend', () => {highlightSquares = false});
 window.addEventListener('touchmove', handleTouchMove, {passive: false});
 
 // Used for playerPlaceShipPhase and attackPhase
@@ -36,14 +36,11 @@ let j = 0;
 
 // Helper functions for playerPlaceShipPhase
 const switchAxis = (board) => {
-  if(mouseTouchHold){
   renderShadow(lastCoordsRendered, "clear", board, lastShip);
   axis === "x" ? (axis = "y") : (axis = "x");
-  renderShadow(lastCoordsRendered, "fill", board, lastShip);
-  } else {
-    axis === "x" ? (axis = "y") : (axis = "x");
+  if(highlightSquares){
+    renderShadow(lastCoordsRendered, "fill", board, lastShip);
   }
- switchAxisNarrative();
 };
 
 const renderShadow = (coords, fill, board, ship) => {
@@ -94,6 +91,7 @@ const clickToPlace = (coords, board, ship) => {
   x = parseInt(x, 10);
   y = parseInt(y, 10);
   if (board.checkCollision(ship, x, y, axis)) {
+    renderShadow([x, y], 'clear', board, ship);
     return;
   }
   board.place(ship, x, y, axis);
@@ -112,30 +110,6 @@ const playerPlaceShip = (board, ship) => {
   const squares = document.querySelectorAll("#p1 .board .square");
   switchAxisNarrative();
 
-  squares.forEach((square) => {
-    square.addEventListener('touchstart', (e) => {
-      const { x, y } = e.target.dataset;
-      renderShadow([x, y], "fill", board, ship);
-      touched = e.target;
-    });
-    square.addEventListener("mouseover", (e) => {
-      const { x, y } = e.target.dataset;
-      renderShadow([x, y], "fill", board, ship);
-    });
-
-    square.addEventListener("mouseout", (e) => {
-      const { x, y } = e.target.dataset;
-      renderShadow([x, y], "clear", board, ship)
-    });
-    square.addEventListener("touchend", () => {
-      clickToPlace(lastCoordsRendered, board, ship);
-    });
-    square.addEventListener("click", (e) => {
-      const { x, y } = e.target.dataset;
-      clickToPlace([x, y], board, ship)
-    });
-  });
-
   if (i === 0) {
     window.addEventListener("keydown", (e) => {
       if (e.key === "x") {
@@ -143,6 +117,32 @@ const playerPlaceShip = (board, ship) => {
       }
     });
   }
+
+  squares.forEach((square) => {
+    square.addEventListener('touchstart', (e) => {
+      const { x, y } = e.target.dataset;
+      renderShadow([x, y], "fill", board, ship);
+      touched = e.target;
+    });
+    square.addEventListener("mouseover", (e) => {
+      highlightSquares = true;
+      const { x, y } = e.target.dataset;
+      renderShadow([x, y], "fill", board, ship);
+    });
+    square.addEventListener("mouseout", (e) => {
+      highlightSquares = false;
+      const { x, y } = e.target.dataset;
+      renderShadow([x, y], "clear", board, ship)
+    });
+    square.addEventListener("touchend", () => {
+      clickToPlace(lastCoordsRendered, board, ship);
+    });
+    square.addEventListener("click", (e) => {
+      highlightSquares = false;
+      const { x, y } = e.target.dataset;
+      clickToPlace([x, y], board, ship)
+    });
+  });
 };
 
 function playerPlaceShipPhase(board, ships) {
