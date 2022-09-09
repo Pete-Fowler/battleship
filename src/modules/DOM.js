@@ -350,7 +350,6 @@ function handleTouchMove(e) {
 export {
   p1Box,
   p2Box,
-  startMusic,
   playerPlaceShip,
   playerPlaceShipPhase,
   AIPlaceShipPhase,
