@@ -13,3 +13,5 @@ Using Array.prototype.fill() with an object such as another array passes referen
 I learned to use JSON.stringify() to compare the content of arrays in the AI adjacent shot function. However, I realize this is probably not the best method, and a recursive comparison such as in the Lodash library would be better, since JSON.stringify() can fail in some edge cases (such as if it contains null or undefined), and it is dependent on the implementation of the method not changing.
 
 It seems like the code could always be better organized, with some functions more closely following the single responsibility principle. The AI attack seemed especially messy. If doing this again, I would at a minimum move the AI attack logic to a separate module, and would separate the AI and human branches out of a single attack function into two in the player module. 
+
+Background image (Creative Commons License): https://pxhere.com/en/photo/1360845?utm_content=shareClip&utm_medium=referral&utm_source=pxhere
