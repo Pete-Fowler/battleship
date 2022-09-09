@@ -36,6 +36,10 @@ const gameOverEvent = new Event("gameOver");
 // For AIPlaceShipPhase
 let j = 0;
 
+// Used to only vibrate mobile phone on first hit
+let AIHits = 0;
+let playerHits = 0;
+
 // Helper functions for playerPlaceShipPhase
 const switchAxis = (board) => {
   renderShadow(lastCoordsRendered, "clear", board, lastShip);
@@ -208,24 +212,31 @@ const updateAIBoard = (board, x, y) => {
 const attackCallback = (e, board) => {
   const { x, y } = e.target.dataset;
   
-   // Remove hover effect and click to attack 
-   const squares = document.querySelectorAll("#p2 .square");
-   squares.forEach((el) => {
-     el.classList.remove("hoverable");
-     el.replaceWith(el.cloneNode());
-   });
+  // Remove hover effect and click to attack 
+  const squares = document.querySelectorAll("#p2 .square");
+  squares.forEach((el) => {
+    el.classList.remove("hoverable");
+    el.replaceWith(el.cloneNode());
+  });
 
-   updateAIBoard(board, x, y);
-   board.incoming(x, y);
-   
   // Update DOM and board
+  updateAIBoard(board, x, y);
+  board.incoming(x, y);
+   
+  // Test if sunk
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
+    if(window.vibrate() && playerHits === 0) {
+      window.vibrate(200, 200);
+      playerHits += 1;
+    }
     if(ship.isSunk()) {
       narrate(`You've sunk the enemy's ${ship.type}!!!`);
+      playerHits = 0;
     }
   }
  
+  // Test if game is over
   if(!board.isGameOver()) {
     setTimeout(AIAttack, 500);
   } else if(board.isGameOver()) {
@@ -266,9 +277,14 @@ function AIAttack() {
     updateBoard(p1Board, x, y);
 
     if(p1Board.getLastShotHit()) {
-      window.navigator.vibrate(500);
+      if (navigator.vibrate && AIHits === 0) 
+        navigator.vibrate(500);
+      AIHits += 1;
       const ship = p1Board.getMap()[x][y][0];
-      ship.isSunk() && narrate(`All hands on deck! Your ${ship.type} is sinking!!!`);
+      if(ship.isSunk()) {
+        narrate(`All hands on deck! Your ${ship.type} is sinking!!!`);
+        AIHits = 0;
+      }
     }
 
     if(!p1Board.isGameOver()) {
