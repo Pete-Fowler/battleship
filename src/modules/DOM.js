@@ -5,8 +5,6 @@ const p1Box = document.querySelector("#p1");
 const p2Box = document.querySelector("#p2");
 const narrative = document.querySelector("#narrative");
 
-let muted;
-
 // Used in switchAxis and renderShadow and playerPlaceShip
 let axis = "y";
 let lastCoordsRendered;
@@ -348,16 +346,6 @@ function handleTouchMove(e) {
     }
   }
 }
-
-const music = new Audio('../audio/the-shield-111353.mp3');
-function startMusic() {
-  music.addEventListener('canplaythrough', () => music.play());
-}
-
-function mute() {
-  music.stop();
-  muted = true;
-} 
 
 export {
   p1Box,
