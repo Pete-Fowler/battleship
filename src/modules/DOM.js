@@ -40,7 +40,6 @@ let j = 0;
 
 // Used to only vibrate mobile phone on first hit
 let AIHits = 0;
-let playerHits = 0;
 
 // Helper functions for playerPlaceShipPhase
 const switchAxis = (board) => {
@@ -227,15 +226,8 @@ const attackCallback = (e, board) => {
   // Test if sunk
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
-    if(canVibrate && playerHits === 0) {
-      navigator.vibrate(300);
-      playerHits += 1;
-    }
     if(ship.isSunk()) {
       narrate(`You've sunk the enemy's ${ship.type}!!!`);
-      if(canVibrate) 
-        navigator.vibrate(300);
-        playerHits = 0;
     }
   }
  
