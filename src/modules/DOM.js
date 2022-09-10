@@ -228,12 +228,14 @@ const attackCallback = (e, board) => {
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
     if(canVibrate && playerHits === 0) {
-      navigator.vibrate([300, 300, 300]);
+      navigator.vibrate(300);
       playerHits += 1;
     }
     if(ship.isSunk()) {
       narrate(`You've sunk the enemy's ${ship.type}!!!`);
-      playerHits = 0;
+      if(canVibrate) 
+        navigator.vibrate(300);
+        playerHits = 0;
     }
   }
  
@@ -284,6 +286,8 @@ function AIAttack() {
       const ship = p1Board.getMap()[x][y][0];
       if(ship.isSunk()) {
         narrate(`All hands on deck! Your ${ship.type} is sinking!!!`);
+        if (canVibrate) 
+          navigator.vibrate(500);
         AIHits = 0;
       }
     }
