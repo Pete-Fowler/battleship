@@ -106,7 +106,6 @@ const clickToPlace = (coords, board, ship) => {
     window.removeEventListener('touchmove', handleTouchMove, {passive: false});
   }
   playerPlaceShipPhase(p1Board, p1Ships);
-  startMusic();
 };
 
 const playerPlaceShip = (board, ship) => {
@@ -224,8 +223,8 @@ const attackCallback = (e, board) => {
   // Test if sunk
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
-    if(window.vibrate() && playerHits === 0) {
-      window.vibrate(200, 200);
+    if(navigator.vibrate && playerHits === 0) {
+      navigator.vibrate([200, 200]);
       playerHits += 1;
     }
     if(ship.isSunk()) {
