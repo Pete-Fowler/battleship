@@ -5,6 +5,10 @@ const p1Box = document.querySelector("#p1");
 const p2Box = document.querySelector("#p2");
 const narrative = document.querySelector("#narrative");
 
+let canVibrate = false;
+if('vibrate' in navigator)
+  canVibrate = true;
+
 // Used in switchAxis and renderShadow and playerPlaceShip
 let axis = "y";
 let lastCoordsRendered;
@@ -223,8 +227,8 @@ const attackCallback = (e, board) => {
   // Test if sunk
   if(typeof board.getMap()[x][y] === 'object') {
     const ship = board.getMap()[x][y][0];
-    if(navigator.vibrate && playerHits === 0) {
-      navigator.vibrate([200, 200]);
+    if(canVibrate && playerHits === 0) {
+      navigator.vibrate([300, 300, 300]);
       playerHits += 1;
     }
     if(ship.isSunk()) {
@@ -274,7 +278,7 @@ function AIAttack() {
     updateBoard(p1Board, x, y);
 
     if(p1Board.getLastShotHit()) {
-      if (navigator.vibrate && AIHits === 0) 
+      if (canVibrate && AIHits === 0) 
         navigator.vibrate(500);
       AIHits += 1;
       const ship = p1Board.getMap()[x][y][0];
