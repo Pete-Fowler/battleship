@@ -2,9 +2,9 @@ const gameBoard = () => {
   let map;
   let sunkShips = 0;
   let lastShotHit = false;
-  
+
   const getLastShotHit = () => lastShotHit;
-  
+
   const init = () => {
     sunkShips = 0;
     map = Array(10);
@@ -12,7 +12,7 @@ const gameBoard = () => {
       map[i] = Array(10).fill(0);
     }
   };
-  
+
   const getMap = () => map;
 
   const checkCollision = (ship, x, y, axis) => {
@@ -51,7 +51,7 @@ const gameBoard = () => {
     }
     return false;
   };
- 
+
   const place = (ship, x, y, axis) => {
     // i is hull index to track hits
     let i = 0;
@@ -68,21 +68,21 @@ const gameBoard = () => {
       }
     }
   };
-  
+
   const isGameOver = () => {
     if (sunkShips === 5) {
       return true;
     }
     return false;
   };
- 
+
   const testIfSunk = (ship) => {
     if (ship.isSunk()) {
       sunkShips += 1;
     }
     isGameOver(sunkShips);
   };
- 
+
   const incoming = (x, y) => {
     let ship;
     let hullIndex;
@@ -96,7 +96,7 @@ const gameBoard = () => {
       lastShotHit = false;
     }
   };
- 
+
   const getSunkShips = () => sunkShips;
   return {
     init,
